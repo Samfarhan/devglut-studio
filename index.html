@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="utf-8"/>
@@ -257,8 +257,8 @@
       z-index: 1;
     }
 
-    /* ==========================================================================
-       FLOATING ISLAND GLASS CAPSULE HEADER & ANIMATED LOGO EMBLEM
+        /* ==========================================================================
+       DEVGLUT NEXT-GEN FLOATING ISLAND NAVIGATION & ARCHITECTURAL MENU SYSTEM
        ========================================================================== */
     .header-fixed {
       position: fixed;
@@ -266,26 +266,26 @@
       left: 0;
       right: 0;
       z-index: 1000;
-      padding: 16px 20px;
+      padding: 16px 24px;
       transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       pointer-events: none;
     }
 
     .header-fixed.scrolled {
-      padding: 8px 20px;
+      padding: 8px 24px;
     }
 
     .nav-capsule {
-      max-width: 1380px;
+      max-width: 1420px;
       margin: 0 auto;
       height: 64px;
-      padding: 0 16px 0 14px;
-      background: rgba(10, 12, 10, 0.76);
-      backdrop-filter: blur(28px) saturate(210%);
-      -webkit-backdrop-filter: blur(28px) saturate(210%);
+      padding: 0 14px 0 16px;
+      background: rgba(8, 10, 8, 0.82);
+      backdrop-filter: blur(32px) saturate(220%);
+      -webkit-backdrop-filter: blur(32px) saturate(220%);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 9999px;
-      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.25);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -297,15 +297,17 @@
 
     .header-fixed.scrolled .nav-capsule {
       background: rgba(4, 6, 4, 0.94);
-      border-color: rgba(52, 211, 153, 0.28);
-      box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.95), 0 0 28px rgba(16, 185, 129, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+      border-color: rgba(52, 211, 153, 0.32);
+      box-shadow: 0 24px 54px -10px rgba(0, 0, 0, 0.96), 0 0 30px rgba(16, 185, 129, 0.22), inset 0 1px 2px rgba(255, 255, 255, 0.3);
       height: 58px;
     }
 
+    /* Brand Logo Group */
     .brand-group {
       display: flex;
       align-items: center;
       gap: 14px;
+      flex-shrink: 0;
     }
 
     .brand-logo {
@@ -317,7 +319,6 @@
       letter-spacing: -0.02em;
     }
 
-    /* Animated Holographic Conic Border Logo Badge */
     .logo-badge-wrap {
       position: relative;
       width: 38px;
@@ -395,7 +396,7 @@
       letter-spacing: 0.04em;
     }
 
-    @media (min-width: 1200px) {
+    @media (min-width: 1280px) {
       .studio-radar-chip {
         display: inline-flex;
       }
@@ -432,65 +433,378 @@
       100% { transform: scale(2.2); opacity: 0; }
     }
 
-    .nav-center-pills {
+    /* ==========================================================================
+       CENTER FLOATING ISLAND NAV WITH LIQUID GLIDER & DROP-DOWN FLYOUTS
+       ========================================================================== */
+    .nav-island-track {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 4px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    @media (max-width: 1080px) {
+      .nav-island-track {
+        display: none;
+      }
+    }
+
+    .nav-liquid-glider {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      height: calc(100% - 8px);
+      width: 0;
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.16) 0%, rgba(200, 180, 160, 0.12) 100%);
+      border: 1px solid rgba(52, 211, 153, 0.38);
+      border-radius: 9999px;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      pointer-events: none;
+      opacity: 0;
+      transform: translate3d(0, 0, 0);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1;
+    }
+
+    .nav-liquid-glider.active {
+      opacity: 1;
+    }
+
+    .nav-item-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .nav-island-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      height: 36px;
+      padding: 0 16px;
+      border-radius: 9999px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .nav-island-link:hover, .nav-item-wrapper:hover .nav-island-link {
+      color: #ffffff;
+    }
+
+    .nav-chevron {
+      opacity: 0.55;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s;
+    }
+
+    .nav-item-wrapper:hover .nav-chevron {
+      transform: rotate(180deg);
+      opacity: 1;
+      color: var(--color-emerald-400);
+    }
+
+    .nav-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-emerald-400);
+      box-shadow: 0 0 8px var(--color-emerald-400);
+    }
+
+    .nav-micro-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      padding: 1px 6px;
+      border-radius: 9999px;
+      background: rgba(52, 211, 153, 0.15);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      color: var(--color-emerald-400);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-dropdown-bridge {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 18px;
+      pointer-events: auto;
+    }
+
+    /* ==========================================================================
+       MEGA GLASS DROPDOWN PANELS
+       ========================================================================== */
+    .nav-dropdown-flyout {
+      position: absolute;
+      top: calc(100% + 14px);
+      background: rgba(7, 9, 7, 0.94);
+      backdrop-filter: blur(36px) saturate(220%);
+      -webkit-backdrop-filter: blur(36px) saturate(220%);
+      border: 1px solid rgba(52, 211, 153, 0.26);
+      border-radius: 20px;
+      box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.95), 0 0 35px rgba(16, 185, 129, 0.12), inset 0 1px 1.5px rgba(255, 255, 255, 0.2);
+      padding: 22px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px) scale(0.98);
+      transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1002;
+    }
+
+    .nav-item-wrapper:hover .nav-dropdown-flyout {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Capabilities Mega Dropdown */
+    .dropdown-capabilities {
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px) scale(0.98);
+      width: 720px;
+    }
+    .nav-item-wrapper:hover .dropdown-capabilities {
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .dropdown-header-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .dropdown-title-text {
+      color: var(--color-emerald-400);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    @media (max-width: 1040px) {
-      .nav-center-pills {
-        display: none;
-      }
+    .dropdown-sla-text {
+      color: var(--color-sand);
+      opacity: 0.8;
     }
 
-    /* Flowstack Signature Nav Pill */
-    .nav-pill {
-      color: #f3ede6;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-      background: linear-gradient(105deg, #16130f 0%, #302821 48%, #4a3d32 100%);
-      border: 1px solid rgba(200, 180, 160, 0.32);
-      border-radius: 9999px;
-      align-items: center;
-      height: 36px;
-      padding: 0 15px;
-      font-size: 13px;
-      font-weight: 450;
-      transition: background 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.2s;
-      display: inline-flex;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nav-pill:before {
-      content: "";
-      background: linear-gradient(115deg, transparent 30%, rgba(255, 245, 235, 0.35) 50%, transparent 70%);
-      transition: transform 0.6s ease;
-      position: absolute;
-      inset: 0;
-      transform: translate(-120%);
-    }
-
-    .nav-pill:hover:before {
-      transform: translate(120%);
-    }
-
-    .nav-pill:hover {
-      background: linear-gradient(105deg, #241f18 0%, #4a3c30 45%, #7a6353 100%);
-      border-color: rgba(230, 210, 190, 0.85);
-      box-shadow: 0 0 18px rgba(200, 170, 140, 0.35);
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
+    .services-mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
-    /* Equalizer Sound Button */
+    .service-mini-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.22s ease;
+      text-decoration: none;
+    }
+
+    .service-mini-card:hover {
+      background: rgba(52, 211, 153, 0.08);
+      border-color: rgba(52, 211, 153, 0.35);
+      transform: translateY(-1.5px);
+    }
+
+    .service-mini-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-emerald-400);
+      flex-shrink: 0;
+    }
+
+    .service-mini-meta h4 {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .service-mini-meta p {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.35;
+    }
+
+    .dropdown-footer-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+    }
+
+    /* Showcase Mega Dropdown */
+    .dropdown-showcase {
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px) scale(0.98);
+      width: 660px;
+    }
+    .nav-item-wrapper:hover .dropdown-showcase {
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .showcase-mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .showcase-mini-card {
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.22s ease;
+      cursor: pointer;
+    }
+
+    .showcase-mini-card:hover {
+      background: rgba(52, 211, 153, 0.07);
+      border-color: rgba(52, 211, 153, 0.38);
+      transform: translateY(-2px);
+    }
+
+    .showcase-mini-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .showcase-mini-title {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .showcase-mini-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--color-emerald-400);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+
+    .showcase-mini-desc {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .showcase-mini-tags {
+      display: flex;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: var(--color-sand);
+    }
+
+    /* Founders Dropdown */
+    .dropdown-founders {
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px) scale(0.98);
+      width: 520px;
+    }
+    .nav-item-wrapper:hover .dropdown-founders {
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .founders-mini-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .founder-mini-card {
+      flex: 1;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: left;
+    }
+
+    .founder-mini-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .founder-avatar-initials {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #16241a, #0b140e);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 11px;
+      color: var(--color-emerald-400);
+    }
+
+    .founder-mini-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .founder-mini-role {
+      font-size: 11px;
+      color: var(--color-sand);
+      font-family: var(--font-mono);
+    }
+
+    .founder-mini-bio {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.4;
+    }
+
+    /* ==========================================================================
+       RIGHT HEADER CONTROLS & ARCHITECTURAL MENU TRIGGER BUTTON
+       ========================================================================== */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     .btn-audio-toggle {
       font-family: var(--font-mono);
       font-size: 11.5px;
@@ -545,7 +859,6 @@
       100% { height: 40%; }
     }
 
-    /* Terminal Quick Key Pill */
     .btn-term-pill {
       font-family: var(--font-mono);
       font-size: 12px;
@@ -570,10 +883,9 @@
       transform: translateY(-1px);
     }
 
-    /* DEVGLUT AI Animated Sparkle Button */
     .btn-nav-ai {
       height: 36px;
-      padding: 0 16px;
+      padding: 0 15px;
       border-radius: 9999px;
       font-size: 12.5px;
       font-weight: 600;
@@ -604,7 +916,56 @@
       50% { transform: scale(1.15) rotate(180deg); }
     }
 
-    /* Mobile Hamburger Trigger */
+    /* Architectural Studio Menu Trigger Button */
+    .btn-studio-menu {
+      height: 36px;
+      padding: 0 15px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(200, 180, 160, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #f3ede6;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-studio-menu:hover {
+      background: rgba(52, 211, 153, 0.12);
+      border-color: var(--color-emerald-400);
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .menu-bars-icon {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5px;
+      width: 14px;
+    }
+
+    .m-bar {
+      display: block;
+      height: 1.6px;
+      background: currentColor;
+      border-radius: 1px;
+      transition: all 0.25s;
+    }
+    .m-bar:nth-child(1) { width: 14px; }
+    .m-bar:nth-child(2) { width: 9px; }
+
+    .btn-studio-menu:hover .m-bar:nth-child(2) {
+      width: 14px;
+    }
+
+    /* Mobile Nav Toggle */
     .mobile-nav-toggle {
       display: none;
       width: 38px;
@@ -615,14 +976,17 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 4.5px;
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    @media (max-width: 1040px) {
+    @media (max-width: 1080px) {
       .mobile-nav-toggle {
         display: flex;
+      }
+      .btn-studio-menu {
+        display: none;
       }
     }
 
@@ -635,62 +999,355 @@
     }
 
     .mobile-nav-toggle.open .bar:nth-child(1) {
-      transform: translateY(5.8px) rotate(45deg);
+      transform: translateY(6.3px) rotate(45deg);
     }
     .mobile-nav-toggle.open .bar:nth-child(2) {
       opacity: 0;
     }
     .mobile-nav-toggle.open .bar:nth-child(3) {
-      transform: translateY(-5.8px) rotate(-45deg);
+      transform: translateY(-6.3px) rotate(-45deg);
     }
 
-    /* Mobile Slide-down Glass Drawer */
-    #mobile-nav-drawer {
+    /* ==========================================================================
+       FULLSCREEN CINEMATIC STUDIO ARCHITECTURAL MENU OVERLAY
+       ========================================================================== */
+    #studio-architectural-menu {
       position: fixed;
-      top: 86px;
-      left: 16px;
-      right: 16px;
-      background: rgba(8, 10, 8, 0.94);
-      backdrop-filter: blur(32px) saturate(220%);
-      -webkit-backdrop-filter: blur(32px) saturate(220%);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.05);
-      z-index: 998;
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-      animation: drawerSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    #mobile-nav-drawer.open {
+      inset: 0;
+      background: rgba(4, 5, 4, 0.96);
+      backdrop-filter: blur(45px) saturate(240%);
+      -webkit-backdrop-filter: blur(45px) saturate(240%);
+      z-index: 10005;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    @keyframes drawerSlideDown {
-      0% { opacity: 0; transform: translateY(-14px); }
-      100% { opacity: 1; transform: translateY(0); }
+    #studio-architectural-menu.open {
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    .mobile-nav-link {
-      padding: 12px 16px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      font-size: 14px;
-      font-weight: 500;
-      color: #f3ede6;
+    .menu-ambient-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(120px);
+      opacity: 0.25;
+    }
+
+    .glow-1 {
+      top: -100px;
+      left: 10%;
+      background: radial-gradient(circle, var(--color-emerald-500) 0%, transparent 70%);
+    }
+
+    .glow-2 {
+      bottom: -150px;
+      right: 15%;
+      background: radial-gradient(circle, var(--color-sand) 0%, transparent 70%);
+    }
+
+    .studio-menu-inner {
+      width: 100%;
+      max-width: 1400px;
+      height: 100vh;
+      max-height: 920px;
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+      .studio-menu-inner {
+        padding: 20px;
+        max-height: 100vh;
+        overflow-y: auto;
+      }
+    }
+
+    /* Top Bar */
+    .studio-menu-topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: all 0.2s;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .mobile-nav-link:hover {
-      background: rgba(52, 211, 153, 0.1);
-      border-color: rgba(52, 211, 153, 0.3);
-      color: #34d399;
+    .menu-brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-telemetry-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--color-sand);
+    }
+
+    @media (max-width: 680px) {
+      .menu-telemetry-chip {
+        display: none;
+      }
+    }
+
+    .btn-close-menu {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-close-menu:hover {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.45);
+      color: #fca5a5;
+    }
+
+    /* Menu Main Grid */
+    .studio-menu-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 30px 0;
+      flex: 1;
+    }
+
+    @media (max-width: 960px) {
+      .studio-menu-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 20px 0;
+      }
+      .studio-menu-inspector {
+        display: none;
+      }
+    }
+
+    /* Left: Kinetic Typography Links */
+    .studio-menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .studio-nav-item {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      padding: 8px 0;
+      text-decoration: none;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s;
+      position: relative;
+    }
+
+    .item-num {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.1em;
+      transition: color 0.25s;
+    }
+
+    .item-label {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 4vw, 54px);
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .item-arrow {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      color: var(--color-emerald-400);
+      opacity: 0;
+      transform: translateX(-15px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .studio-nav-item:hover {
+      transform: translateX(12px);
+    }
+
+    .studio-nav-item:hover .item-num {
+      color: var(--color-emerald-400);
+    }
+
+    .studio-nav-item:hover .item-label {
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(52, 211, 153, 0.35);
+    }
+
+    .studio-nav-item:hover .item-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .studio-nav-cta .item-label {
+      background: linear-gradient(135deg, var(--color-emerald-400), #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 400;
+    }
+
+    /* Right: Dynamic Inspector & Hub */
+    .studio-menu-inspector {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .inspector-card {
+      background: rgba(14, 18, 14, 0.75);
+      backdrop-filter: blur(28px);
+      border: 1px solid rgba(52, 211, 153, 0.28);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      min-height: 230px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .inspector-hub-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 16px 20px;
+    }
+
+    .hub-stat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .hub-stat-label {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.08em;
+    }
+
+    .hub-stat-val {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .menu-action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.2fr;
+      gap: 10px;
+    }
+
+    .btn-menu-action {
+      height: 42px;
+      border-radius: 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+
+    .btn-menu-ai {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      color: var(--color-emerald-400);
+    }
+    .btn-menu-ai:hover {
+      background: var(--color-emerald-500);
+      color: #000;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+    }
+
+    .btn-menu-term {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.85);
+      font-family: var(--font-mono);
+    }
+    .btn-menu-term:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fff;
+    }
+
+    .btn-menu-brief {
+      background: linear-gradient(135deg, #c8b4a0 0%, #ffffff 100%);
+      border: none;
+      color: #000000;
+    }
+    .btn-menu-brief:hover {
+      box-shadow: 0 0 24px rgba(200, 180, 160, 0.5);
+      transform: translateY(-1px);
+    }
+
+    /* Menu Footer */
+    .studio-menu-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .menu-social-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-social-links a {
+      color: rgba(255, 255, 255, 0.7);
+      transition: color 0.2s;
+    }
+
+    .menu-social-links a:hover {
+      color: var(--color-emerald-400);
     }
 
     /* Ambient Hardware-Accelerated Pointer Aura (Fine pointers only) */
@@ -2319,8 +2976,8 @@
   <!-- Ambient Hardware-Accelerated Pointer Aura Glow (Desktop) -->
   <div id="pointer-aura"></div>
 
-  <!-- ==========================================================================
-       FLOATING ISLAND GLASS CAPSULE NAVIGATION
+    <!-- ==========================================================================
+       NEXT-GEN FLOATING ISLAND NAVIGATION & INTERACTIVE ARCHITECTURAL MENU
        ========================================================================== -->
   <header class="header-fixed" id="main-header">
     <div class="nav-capsule">
@@ -2340,20 +2997,193 @@
             <span class="sonar-wave"></span>
             <span class="sonar-dot"></span>
           </span>
-          <span class="chip-text">STUDIO LABS · ACTIVE</span>
+          <span class="chip-text">STUDIO LABS &bull; ACTIVE</span>
         </div>
       </div>
 
-      <!-- Center Flowstack Signature Nav Pills -->
-      <nav class="nav-center-pills" id="nav-pills-track">
-        <a href="#services" class="nav-pill" onmouseenter="playAudio('hover')">Services</a>
-        <a href="#showcase" class="nav-pill" onmouseenter="playAudio('hover')">Showcase</a>
-        <a href="#workflow" class="nav-pill" onmouseenter="playAudio('hover')">Workflow</a>
-        <a href="#work" class="nav-pill" onmouseenter="playAudio('hover')">Philosophy</a>
-        <a href="#cases" class="nav-pill" onmouseenter="playAudio('hover')">Use Cases</a>
-        <a href="#team" class="nav-pill" onmouseenter="playAudio('hover')">Founders</a>
-        <a href="#pricing" class="nav-pill" onmouseenter="playAudio('hover')">Pricing</a>
-        <a href="#faq" class="nav-pill" onmouseenter="playAudio('hover')">FAQ</a>
+      <!-- Center Floating Island Nav with Glider & Dropdown Flyouts -->
+      <nav class="nav-island-track" id="nav-island-track">
+        <div class="nav-liquid-glider" id="nav-liquid-glider"></div>
+
+        <!-- 1. Capabilities Item with Mega Dropdown -->
+        <div class="nav-item-wrapper">
+          <a href="#services" class="nav-island-link" onmouseenter="handleNavHover(this); playAudio('hover');">
+            <span>Capabilities</span>
+            <svg class="nav-chevron" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <div class="nav-dropdown-bridge"></div>
+          <div class="nav-dropdown-flyout dropdown-capabilities">
+            <div class="dropdown-header-strip">
+              <span class="dropdown-title-text">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                STUDIO CAPABILITIES // 6 VERTICALS
+              </span>
+              <span class="dropdown-sla-text">AVERAGE SPRINT: 7&ndash;14 DAYS</span>
+            </div>
+            <div class="services-mini-grid">
+              <a href="#services" class="service-mini-card">
+                <div class="service-mini-icon">3D</div>
+                <div class="service-mini-meta">
+                  <h4>3D WebGL &amp; Spatial UI</h4>
+                  <p>Three.js, GLSL fragment shaders, dielectric reflections</p>
+                </div>
+              </a>
+              <a href="#services" class="service-mini-card">
+                <div class="service-mini-icon">AI</div>
+                <div class="service-mini-meta">
+                  <h4>Autonomous AI Systems</h4>
+                  <p>Supabase pgvector, streaming LLMs &amp; Rust tokenizers</p>
+                </div>
+              </a>
+              <a href="#services" class="service-mini-card">
+                <div class="service-mini-icon">NX</div>
+                <div class="service-mini-meta">
+                  <h4>Next.js 15 Fullstack Edge</h4>
+                  <p>App Router, server actions &amp; zero-latency API architecture</p>
+                </div>
+              </a>
+              <a href="#services" class="service-mini-card">
+                <div class="service-mini-icon">UX</div>
+                <div class="service-mini-meta">
+                  <h4>Brand Identity &amp; Systems</h4>
+                  <p>Tactile micro-interactions, dark glass &amp; design tokens</p>
+                </div>
+              </a>
+              <a href="#services" class="service-mini-card">
+                <div class="service-mini-icon">PAY</div>
+                <div class="service-mini-meta">
+                  <h4>Global E-Commerce</h4>
+                  <p>Razorpay, Stripe Edge, real-time cart &amp; instant webhooks</p>
+                </div>
+              </a>
+              <a href="#services" class="service-mini-card">
+                <div class="service-mini-icon">APP</div>
+                <div class="service-mini-meta">
+                  <h4>Mobile App Engineering</h4>
+                  <p>React Native, Metal GPU shaders &amp; offline-first synchronization</p>
+                </div>
+              </a>
+            </div>
+            <div class="dropdown-footer-strip">
+              <span style="color: var(--color-sand); font-family: var(--font-mono); font-size: 11px;">Fixed-Price Milestones &bull; 100% IP Transfer &bull; NDA Protected</span>
+              <a href="#services" style="color: var(--color-emerald-400); font-weight: 600;">Explore All Services &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Showcase Item with Project Preview Flyout -->
+        <div class="nav-item-wrapper">
+          <a href="#showcase" class="nav-island-link" onmouseenter="handleNavHover(this); playAudio('hover');">
+            <span>Showcase</span>
+            <svg class="nav-chevron" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <div class="nav-dropdown-bridge"></div>
+          <div class="nav-dropdown-flyout dropdown-showcase">
+            <div class="dropdown-header-strip">
+              <span class="dropdown-title-text">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                CURATED FLAGSHIP SHOWCASE
+              </span>
+              <span class="dropdown-sla-text">LIVE CASE INSPECTIONS</span>
+            </div>
+            <div class="showcase-mini-grid">
+              <div class="showcase-mini-card" onclick="openCaseStudy('cyberspatial')">
+                <div class="showcase-mini-head">
+                  <span class="showcase-mini-title">CYBERSPATIAL</span>
+                  <span class="showcase-mini-badge">60 FPS</span>
+                </div>
+                <div class="showcase-mini-desc">3D WebGL Configurator &amp; Spatial dielectric engine</div>
+                <div class="showcase-mini-tags"><span>Three.js</span> &bull; <span>GLSL</span> &bull; <span>+340% Conversions</span></div>
+              </div>
+              <div class="showcase-mini-card" onclick="openCaseStudy('neuralmesh')">
+                <div class="showcase-mini-head">
+                  <span class="showcase-mini-title">NEURALMESH</span>
+                  <span class="showcase-mini-badge">12ms Recall</span>
+                </div>
+                <div class="showcase-mini-desc">Autonomous multi-agent cognition reasoning topology</div>
+                <div class="showcase-mini-tags"><span>pgvector</span> &bull; <span>Rust</span> &bull; <span>1.2M Tokens/Day</span></div>
+              </div>
+              <div class="showcase-mini-card" onclick="openCaseStudy('quantumedge')">
+                <div class="showcase-mini-head">
+                  <span class="showcase-mini-title">QUANTUMEDGE</span>
+                  <span class="showcase-mini-badge">99.98% SLA</span>
+                </div>
+                <div class="showcase-mini-desc">Global edge mesh architecture with zero-latency failover</div>
+                <div class="showcase-mini-tags"><span>Vercel Edge</span> &bull; <span>WASM</span> &bull; <span>Sub-45ms Draw</span></div>
+              </div>
+              <div class="showcase-mini-card" onclick="openCaseStudy('aetherius')">
+                <div class="showcase-mini-head">
+                  <span class="showcase-mini-title">AETHERIUS</span>
+                  <span class="showcase-mini-badge">0ms Lockup</span>
+                </div>
+                <div class="showcase-mini-desc">Generative procedural audio-reactive luxury visual system</div>
+                <div class="showcase-mini-tags"><span>Web Audio API</span> &bull; <span>Fast Fourier</span></div>
+              </div>
+            </div>
+            <div class="dropdown-footer-strip">
+              <span style="color: var(--color-sand); font-family: var(--font-mono); font-size: 11px;">Click any case study to launch deep technical inspection modal</span>
+              <a href="#showcase" style="color: var(--color-emerald-400); font-weight: 600;">View Portfolio &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Founders Item with Leadership Flyout -->
+        <div class="nav-item-wrapper">
+          <a href="#team" class="nav-island-link" onmouseenter="handleNavHover(this); playAudio('hover');">
+            <span class="nav-status-dot"></span>
+            <span>Founders</span>
+            <svg class="nav-chevron" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <div class="nav-dropdown-bridge"></div>
+          <div class="nav-dropdown-flyout dropdown-founders">
+            <div class="dropdown-header-strip">
+              <span class="dropdown-title-text">DEVGLUT STUDIO DIRECTORS</span>
+              <span class="dropdown-sla-text" style="color: var(--color-emerald-400);">ACTIVE NOW</span>
+            </div>
+            <div class="founders-mini-row">
+              <div class="founder-mini-card">
+                <div class="founder-mini-head">
+                  <div class="founder-avatar-initials">FK</div>
+                  <div>
+                    <div class="founder-mini-name">Farhan Khan</div>
+                    <div class="founder-mini-role">Creative Director &amp; 3D Lead</div>
+                  </div>
+                </div>
+                <div class="founder-mini-bio">Specializing in WebGL shaders, visual architecture, spatial typography &amp; luxury brand identity.</div>
+              </div>
+              <div class="founder-mini-card">
+                <div class="founder-mini-head">
+                  <div class="founder-avatar-initials">HR</div>
+                  <div>
+                    <div class="founder-mini-name">Harsh Rawat</div>
+                    <div class="founder-mini-role">Lead Technical Architect</div>
+                  </div>
+                </div>
+                <div class="founder-mini-bio">Architecting multi-agent AI systems, edge concurrency, pgvector semantic search &amp; fullstack engines.</div>
+              </div>
+            </div>
+            <div class="dropdown-footer-strip">
+              <span style="color: var(--color-sand); font-family: var(--font-mono); font-size: 11px;">Direct founder execution &bull; No outsourced layers</span>
+              <button onclick="openProjectModal();" style="color: var(--color-emerald-400); font-weight: 600;">Schedule Strategy Call &rarr;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Workflow Item -->
+        <div class="nav-item-wrapper">
+          <a href="#workflow" class="nav-island-link" onmouseenter="handleNavHover(this); playAudio('hover');">
+            <span>Workflow</span>
+          </a>
+        </div>
+
+        <!-- 5. Sprint Pricing Item -->
+        <div class="nav-item-wrapper">
+          <a href="#pricing" class="nav-island-link" onmouseenter="handleNavHover(this); playAudio('hover');">
+            <span>Pricing</span>
+            <span class="nav-micro-tag">OCT 26</span>
+          </a>
+        </div>
+
       </nav>
 
       <!-- Right Header Actions -->
@@ -2370,7 +3200,7 @@
 
         <!-- Interactive CLI Terminal Button -->
         <button onclick="toggleTerminalModal(); playAudio('terminal');" class="btn-term-pill" title="Press [/] to launch terminal">
-          <span style="font-family: var(--font-mono); font-size: 11px; opacity: 0.7;">⌘</span>
+          <span style="font-family: var(--font-mono); font-size: 11px; opacity: 0.7;">&gt;_</span>
           <span>[ / ]</span>
         </button>
 
@@ -2380,8 +3210,17 @@
           <span>DEVGLUT AI</span>
         </button>
 
+        <!-- Architectural Studio Menu Button (Desktop & Tablet) -->
+        <button class="btn-studio-menu" id="btn-desktop-menu" onclick="toggleStudioMenu(); playAudio('click');" title="Open Studio Architectural Index (M)">
+          <div class="menu-bars-icon">
+            <span class="m-bar"></span>
+            <span class="m-bar"></span>
+          </div>
+          <span>INDEX</span>
+        </button>
+
         <!-- Mobile Menu Hamburger Button -->
-        <button class="mobile-nav-toggle" id="mobile-toggle-btn" onclick="toggleMobileNav()" aria-label="Toggle navigation">
+        <button class="mobile-nav-toggle" id="mobile-toggle-btn" onclick="toggleStudioMenu()" aria-label="Toggle navigation">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
@@ -2391,26 +3230,138 @@
     </div>
   </header>
 
-  <!-- Mobile Glass Slide-down Drawer -->
-  <div id="mobile-nav-drawer">
-    <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 8px;">
-      <div style="font-family: var(--font-mono); font-size: 11px; color: var(--color-emerald-400); letter-spacing: 0.1em;">NAVIGATION · LABS</div>
-      <div style="font-size: 11px; color: var(--color-sand);">FARHAN × HARSH</div>
-    </div>
-    <a href="#services" class="mobile-nav-link" onclick="toggleMobileNav()"><span>Our Services</span> <span>→</span></a>
-    <a href="#showcase" class="mobile-nav-link" onclick="toggleMobileNav()"><span>Showcase Portfolio</span> <span>→</span></a>
-    <a href="#workflow" class="mobile-nav-link" onclick="toggleMobileNav()"><span>Engineering Workflow</span> <span>→</span></a>
-    <a href="#work" class="mobile-nav-link" onclick="toggleMobileNav()"><span>Studio Philosophy</span> <span>→</span></a>
-    <a href="#cases" class="mobile-nav-link" onclick="toggleMobileNav()"><span>Enterprise Use Cases</span> <span>→</span></a>
-    <a href="#team" class="mobile-nav-link" onclick="toggleMobileNav()"><span>Founders</span> <span>→</span></a>
-    <a href="#pricing" class="mobile-nav-link" onclick="toggleMobileNav()"><span>Sprint Pricing</span> <span>→</span></a>
-    <a href="#faq" class="mobile-nav-link" onclick="toggleMobileNav()"><span>Client FAQ</span> <span>→</span></a>
-    <div style="display: flex; gap: 10px; margin-top: 8px;">
-      <button onclick="toggleMobileNav(); toggleAiDrawer();" class="btn-emerald" style="flex: 1; height: 42px; justify-content: center; font-size: 13px;">Launch DEVGLUT AI</button>
-      <button onclick="toggleMobileNav(); openProjectModal();" class="btn-liquid-solid" style="flex: 1; height: 42px; justify-content: center; font-size: 13px;">Initiate Brief</button>
+  <!-- ==========================================================================
+       CINEMATIC FULLSCREEN STUDIO ARCHITECTURAL MENU OVERLAY (Desktop & Mobile)
+       ========================================================================== -->
+  <div id="studio-architectural-menu" aria-hidden="true">
+    <div class="menu-ambient-glow glow-1"></div>
+    <div class="menu-ambient-glow glow-2"></div>
+
+    <div class="studio-menu-inner">
+      <!-- Top Navigation & Controls Header -->
+      <div class="studio-menu-topbar">
+        <div class="menu-brand-meta">
+          <div class="logo-badge-wrap" style="width: 34px; height: 34px;">
+            <div class="logo-badge" style="font-size: 15px;">D</div>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 16px; letter-spacing: -0.02em;">DEV<span style="color: var(--color-emerald-400);">GLUT</span></div>
+            <div style="font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.45); letter-spacing: 0.08em;">ARCHITECTURAL STUDIO INDEX</div>
+          </div>
+        </div>
+
+        <!-- Real-Time Studio Telemetry Chip -->
+        <div class="menu-telemetry-chip">
+          <span class="sonar-beacon"><span class="sonar-wave"></span><span class="sonar-dot"></span></span>
+          <span id="menu-live-clock">NEW DELHI, IN &bull; 08:35 PM IST</span>
+        </div>
+
+        <!-- Close Button -->
+        <button class="btn-close-menu" onclick="toggleStudioMenu(); playAudio('click');" aria-label="Close Studio Menu">
+          <span>CLOSE</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <!-- Main Split Content Grid -->
+      <div class="studio-menu-grid">
+        <!-- Left: Kinetic Editorial Navigation Links -->
+        <nav class="studio-menu-links">
+          <a href="#services" class="studio-nav-item active" onmouseenter="inspectMenuItem('services'); playAudio('hover');" onclick="toggleStudioMenu()">
+            <span class="item-num">01</span>
+            <span class="item-label">Capabilities &amp; WebGL</span>
+            <span class="item-arrow">&rarr;</span>
+          </a>
+          <a href="#showcase" class="studio-nav-item" onmouseenter="inspectMenuItem('showcase'); playAudio('hover');" onclick="toggleStudioMenu()">
+            <span class="item-num">02</span>
+            <span class="item-label">Selected Showcase</span>
+            <span class="item-arrow">&rarr;</span>
+          </a>
+          <a href="#workflow" class="studio-nav-item" onmouseenter="inspectMenuItem('workflow'); playAudio('hover');" onclick="toggleStudioMenu()">
+            <span class="item-num">03</span>
+            <span class="item-label">Sprint Methodology</span>
+            <span class="item-arrow">&rarr;</span>
+          </a>
+          <a href="#team" class="studio-nav-item" onmouseenter="inspectMenuItem('founders'); playAudio('hover');" onclick="toggleStudioMenu()">
+            <span class="item-num">04</span>
+            <span class="item-label">The Founders</span>
+            <span class="item-arrow">&rarr;</span>
+          </a>
+          <a href="#pricing" class="studio-nav-item" onmouseenter="inspectMenuItem('pricing'); playAudio('hover');" onclick="toggleStudioMenu()">
+            <span class="item-num">05</span>
+            <span class="item-label">Fixed-Price Sprints</span>
+            <span class="item-arrow">&rarr;</span>
+          </a>
+          <a href="#faq" class="studio-nav-item" onmouseenter="inspectMenuItem('faq'); playAudio('hover');" onclick="toggleStudioMenu()">
+            <span class="item-num">06</span>
+            <span class="item-label">Intelligence &amp; FAQ</span>
+            <span class="item-arrow">&rarr;</span>
+          </a>
+          <a href="#contact" class="studio-nav-item studio-nav-cta" onmouseenter="inspectMenuItem('brief'); playAudio('hover');" onclick="toggleStudioMenu(); openProjectModal();">
+            <span class="item-num">07</span>
+            <span class="item-label">Initiate Studio Brief</span>
+            <span class="item-arrow">&rarr;</span>
+          </a>
+        </nav>
+
+        <!-- Right: Interactive Dynamic Live Inspector Panel -->
+        <div class="studio-menu-inspector">
+          <!-- Dynamic Morphing Inspector Box -->
+          <div class="inspector-card" id="menu-inspector-card">
+            <!-- Dynamically populated by JS inspectMenuItem() -->
+          </div>
+
+          <!-- Studio Live Hub Stats -->
+          <div class="inspector-hub-meta">
+            <div class="hub-stat-row">
+              <span class="hub-stat-label">LEADERSHIP ONLINE</span>
+              <span class="hub-stat-val" style="color: var(--color-emerald-400);">Farhan Khan &bull; Harsh Rawat</span>
+            </div>
+            <div class="hub-stat-row">
+              <span class="hub-stat-label">SPRINT QUEUE</span>
+              <span class="hub-stat-val">2 Slots Remaining (Oct 2026)</span>
+            </div>
+            <div class="hub-stat-row">
+              <span class="hub-stat-label">AVERAGE TURNAROUND</span>
+              <span class="hub-stat-val">7 &ndash; 14 Business Days</span>
+            </div>
+            <div class="hub-stat-row">
+              <span class="hub-stat-label">GLOBAL EDGE STATUS</span>
+              <span class="hub-stat-val" style="color: #38bdf8;">100% Operational &bull; 99.98% SLA</span>
+            </div>
+          </div>
+
+          <!-- Fast Launch Action Buttons -->
+          <div class="menu-action-buttons">
+            <button onclick="toggleStudioMenu(); toggleAiDrawer(); playAudio('chime');" class="btn-menu-action btn-menu-ai">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path></svg>
+              <span>Launch DEVGLUT AI</span>
+            </button>
+            <button onclick="toggleStudioMenu(); toggleTerminalModal(); playAudio('terminal');" class="btn-menu-action btn-menu-term">
+              <span>Terminal CLI [ / ]</span>
+            </button>
+            <button onclick="toggleStudioMenu(); openProjectModal(); playAudio('chime');" class="btn-menu-action btn-menu-brief">
+              <span>Commission Brief &rarr;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Studio Footer Bar -->
+      <div class="studio-menu-footer">
+        <div class="menu-social-links">
+          <a href="https://github.com/Samfarhan/devglut-studio" target="_blank" rel="noopener">GitHub: Samfarhan</a>
+          <span>&bull;</span>
+          <a href="mailto:farhan@devglut.com">farhan@devglut.com</a>
+          <span>&bull;</span>
+          <span>New Delhi, India</span>
+        </div>
+        <div class="menu-copyright">
+          &copy; 2026 DEVGLUT STUDIO &bull; Farhan Khan &times; Harsh Rawat
+        </div>
+      </div>
     </div>
   </div>
-
 
   <main>
     <!-- ==========================================================================
@@ -4104,7 +5055,7 @@
        INTERACTIVE JAVASCRIPT ENGINE & WEB AUDIO SYNTHESIZER
        ========================================================================== -->
   <script>
-    // 0. Header Scroll Controller & Mobile Nav
+        // 0. Next-Gen Header Scroll Controller & Architectural Menu Engine
     const mainHeader = document.getElementById('main-header');
     window.addEventListener('scroll', () => {
       if (mainHeader) {
@@ -4113,13 +5064,148 @@
       }
     }, { passive: true });
 
-    function toggleMobileNav() {
-      const drawer = document.getElementById('mobile-nav-drawer');
-      const btn = document.getElementById('mobile-toggle-btn');
-      if (!drawer || !btn) return;
-      playAudio('click');
-      drawer.classList.toggle('open');
-      btn.classList.toggle('open');
+    // Architectural Menu Toggle Controller
+    function toggleStudioMenu() {
+      const menu = document.getElementById('studio-architectural-menu');
+      const mobileBtn = document.getElementById('mobile-toggle-btn');
+      if (!menu) return;
+      const isOpen = menu.classList.contains('open');
+      if (isOpen) {
+        menu.classList.remove('open');
+        menu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (mobileBtn) mobileBtn.classList.remove('open');
+      } else {
+        menu.classList.add('open');
+        menu.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (mobileBtn) mobileBtn.classList.add('open');
+        inspectMenuItem('services'); // default preview
+      }
+    }
+
+    // Keyboard Shortcuts (Esc to close, M to toggle)
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const menu = document.getElementById('studio-architectural-menu');
+        if (menu && menu.classList.contains('open')) {
+          toggleStudioMenu();
+        }
+      } else if ((e.key === 'm' || e.key === 'M') && !e.target.matches('input, textarea')) {
+        toggleStudioMenu();
+      }
+    });
+
+    // Real-Time IST Studio Clock
+    function updateStudioClock() {
+      const clockEl = document.getElementById('menu-live-clock');
+      if (!clockEl) return;
+      try {
+        const now = new Date();
+        const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+        const timeStr = new Intl.DateTimeFormat('en-US', options).format(now);
+        clockEl.textContent = `NEW DELHI, IN â€¢ ${timeStr} IST`;
+      } catch (err) {
+        // Fallback
+      }
+    }
+    setInterval(updateStudioClock, 1000);
+    updateStudioClock();
+
+    // Liquid Nav Glider Controller
+    function handleNavHover(targetLink) {
+      const glider = document.getElementById('nav-liquid-glider');
+      const track = document.getElementById('nav-island-track');
+      if (!glider || !track || !targetLink) return;
+
+      const trackRect = track.getBoundingClientRect();
+      const linkRect = targetLink.getBoundingClientRect();
+
+      const leftPos = linkRect.left - trackRect.left;
+      const widthVal = linkRect.width;
+
+      glider.style.left = `${leftPos}px`;
+      glider.style.width = `${widthVal}px`;
+      glider.classList.add('active');
+    }
+
+    const navTrack = document.getElementById('nav-island-track');
+    if (navTrack) {
+      navTrack.addEventListener('mouseleave', () => {
+        const glider = document.getElementById('nav-liquid-glider');
+        if (glider) glider.classList.remove('active');
+      });
+    }
+
+    // Dynamic Architectural Menu Live Inspector
+    const MENU_INSPECTIONS = {
+      services: {
+        tag: "01 // CAPABILITIES & WEBGL",
+        title: "Spatial 3D & Autonomous AI Engineering",
+        desc: "We engineer GPU-accelerated WebGL environments, autonomous agentic cognitive topologies, and high-velocity Next.js edge applications.",
+        metric: "60 FPS Stable â€¢ Sub-12ms Recall â€¢ 7â€“14 Day Delivery",
+        badge: "6 PRODUCTION VERTICALS"
+      },
+      showcase: {
+        tag: "02 // SELECTED SHOWCASE",
+        title: "High-Performance Flagship Deployments",
+        desc: "Direct case inspections of CYBERSPATIAL (3D spatial engine), NEURALMESH (autonomous multi-agent system), and QUANTUMEDGE (edge computing mesh).",
+        metric: "+340% Conversions â€¢ 1.2M Tokens/Day â€¢ 99.98% SLA",
+        badge: "VERIFIED CASE STUDIES"
+      },
+      workflow: {
+        tag: "03 // SPRINT METHODOLOGY",
+        title: "Three-Phase Milestone Velocity",
+        desc: "From Day 1 Interactive Prototype to Day 7 Staging Deployment and Day 14 Production Launch. Transparent, milestone-gated delivery.",
+        metric: "Zero Friction â€¢ Direct Founder Communication â€¢ Daily CI/CD",
+        badge: "AGILE STUDIO CADENCE"
+      },
+      founders: {
+        tag: "04 // THE FOUNDERS",
+        title: "Farhan Khan Ã— Harsh Rawat",
+        desc: "Creative Director Farhan Khan commands spatial UI and brand aesthetics. Technical Architect Harsh Rawat leads deeptech AI cognition and edge systems.",
+        metric: "Direct Partner Access â€¢ No Middlemen â€¢ 100% Code Ownership",
+        badge: "STUDIO DIRECTORS"
+      },
+      pricing: {
+        tag: "05 // SPRINT PRICING",
+        title: "Transparent Fixed-Price Milestones",
+        desc: "Sprint tiers engineered for fast-moving startups and luxury enterprises: â‚¹19,999 Prototype, â‚¹44,999 Production Engine, â‚¹99,999 Flagship Experience.",
+        metric: "â‚¹19,999 â€“ â‚¹99,999 â€¢ All Deliverables Milestone-Gated",
+        badge: "OCTOBER 2026 SLOTS"
+      },
+      faq: {
+        tag: "06 // CLIENT INTELLIGENCE",
+        title: "Code Ownership, SLA & Architecture",
+        desc: "Full intellectual property transfer on final milestone, strict non-disclosure agreements, enterprise edge SLAs, and lifelong codebase maintainability.",
+        metric: "100% IP Transfer â€¢ Strict NDA â€¢ 99.98% SLA Guarantee",
+        badge: "ENTERPRISE SECURITY"
+      },
+      brief: {
+        tag: "07 // INITIATE STUDIO BRIEF",
+        title: "Direct Commission Request",
+        desc: "Submit your project requirements directly to Farhan Khan & Harsh Rawat. Receive a tailored architectural roadmap and cost breakdown within 24 hours.",
+        metric: "Immediate Kickoff Available â€¢ 2 Slots for October 2026",
+        badge: "TRANSMIT BRIEF"
+      }
+    };
+
+    function inspectMenuItem(key) {
+      const data = MENU_INSPECTIONS[key] || MENU_INSPECTIONS.services;
+      const card = document.getElementById('menu-inspector-card');
+      if (!card) return;
+
+      card.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--color-emerald-400); letter-spacing: 0.1em;">${data.tag}</span>
+          <span style="font-family: var(--font-mono); font-size: 10px; padding: 2px 8px; border-radius: 9999px; background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.35); color: var(--color-emerald-400);">${data.badge}</span>
+        </div>
+        <h3 style="font-family: var(--font-serif); font-size: 22px; font-weight: 400; color: #ffffff; margin-bottom: 10px; font-style: italic;">${data.title}</h3>
+        <p style="font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; margin-bottom: 14px;">${data.desc}</p>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--color-sand); border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="color: var(--color-emerald-400);">&bull;</span> ${data.metric}
+        </div>
+      `;
     }
 
     // 0.1 Ambient Hardware-Accelerated Pointer Aura (Desktop Only)
