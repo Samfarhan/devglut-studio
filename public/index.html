@@ -2609,10 +2609,9 @@
     /* 3D Hardware-Accelerated Scroll Reveals */
     .reveal {
       opacity: 0;
-      transform: perspective(1200px) translateY(36px) translateZ(-30px) rotateX(5deg);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translate3d(0, 20px, 0);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
-      transform-style: preserve-3d;
     }
 
     .slide-left {
@@ -2635,7 +2634,7 @@
     .slide-left.active,
     .slide-right.active {
       opacity: 1 !important;
-      transform: perspective(1200px) translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) !important;
+      transform: translate3d(0, 0, 0) !important;
     }
 
     /* ==========================================================================
@@ -5688,39 +5687,19 @@
       setTimeout(checkReveals, 400);
     }
 
-    // 2.1 Dynamic 3D Scroll Parallax & Spatial Tilt Engine
+    // 2.1 Smooth Glitch-Free Viewport Controller
     (function init3DScrollEngine() {
-      let scrollY = window.scrollY;
-      let targetScrollY = scrollY;
-      let ticking = false;
-
-      const tiltCards = document.querySelectorAll('.tilt-card-wrapper');
-
-      function update3DScroll() {
-        scrollY += (targetScrollY - scrollY) * 0.15;
-        const viewCenter = window.innerHeight / 2;
-
-        tiltCards.forEach(cardWrap => {
-          const rect = cardWrap.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) {
-            const cardCenter = rect.top + rect.height / 2;
-            const distFromCenter = (cardCenter - viewCenter) / viewCenter; // -1 to 1
-            const scrollTiltX = Math.max(-5, Math.min(5, distFromCenter * 3.8));
-            cardWrap.style.setProperty('--scroll-tilt', `${scrollTiltX.toFixed(2)}deg`);
-          }
-        });
-      }
-
-      window.addEventListener('scroll', () => {
-        targetScrollY = window.scrollY;
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            update3DScroll();
-            ticking = false;
+      // Lightweight single observer instead of thrashing getBoundingClientRect on scroll
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+            }
           });
-          ticking = true;
-        }
-      }, { passive: true });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.tilt-card-wrapper').forEach(card => observer.observe(card));
+      }
     })();
 
     // 3. Glitch-Free 60 FPS Mouse Tilt & Specular Glare Physics
@@ -6571,62 +6550,8 @@
   
     // ==========================================================================
     // INERTIA MOMENTUM SMOOTH SCROLL ENGINE & SHOWCASE INTERACTION
-    // ==========================================================================
-    (function initInertiaSmoothScroll() {
-      // Respect user motion preferences & touch devices
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
-
-      let currentY = window.pageYOffset;
-      let targetY = currentY;
-      let isScrolling = false;
-
-      window.addEventListener('wheel', (e) => {
-        // Do not intercept if inside scrollable modals or drawers
-        const path = e.composedPath ? e.composedPath() : [];
-        for (let el of path) {
-          if (el.classList && (el.classList.contains('modal-inner') || el.classList.contains('drawer-scroll') || el.id === 'studio-architectural-menu')) {
-            return;
-          }
-        }
-
-        e.preventDefault();
-        const delta = e.deltaY;
-        const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-
-        targetY += delta * 0.9;
-        targetY = Math.max(0, Math.min(targetY, maxScroll));
-
-        if (!isScrolling) {
-          isScrolling = true;
-          requestAnimationFrame(renderSmoothScroll);
-        }
-      }, { passive: false });
-
-      function renderSmoothScroll() {
-        const diff = targetY - currentY;
-        currentY += diff * 0.082; // silky smooth spring lerp
-
-        window.scrollTo(0, Math.round(currentY));
-
-        if (Math.abs(diff) > 0.4) {
-          requestAnimationFrame(renderSmoothScroll);
-        } else {
-          currentY = targetY;
-          window.scrollTo(0, currentY);
-          isScrolling = false;
-        }
-      }
-
-      window.addEventListener('scroll', () => {
-        if (!isScrolling) {
-          currentY = targetY = window.pageYOffset;
-        }
-      }, { passive: true });
-    })();
-
     // Showcase Category Filter Function
-    function filterShowcase(category, btn) {
+    filterShowcase(category, btn) {
       if (typeof playAudio === 'function') playAudio('hover');
 
       document.querySelectorAll('.showcase-filter-btn').forEach(b => b.classList.remove('active'));
