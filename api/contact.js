@@ -5,7 +5,6 @@
  */
 
 export default async function handler(req, res) {
-  // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -28,27 +27,23 @@ export default async function handler(req, res) {
     if (!name || !email) {
       return res.status(400).json({
         success: false,
-        error: 'Missing required fields: name and email are mandatory.'
+        error: 'Missing required fields: Name and Email are mandatory.'
       });
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({
         success: false,
-        error: 'Please provide a valid email address.'
+        error: 'Please provide a valid business email address.'
       });
     }
 
-    // Generate unique studio booking ticket ID
     const ticketId = `DEVGLUT-2026-${Math.floor(1000 + Math.random() * 9000)}`;
     const timestamp = new Date().toISOString();
 
-    // Log brief on server side
-    console.log(`[DEVGLUT BACKEND] New Brief Received! [${ticketId}] from ${name} (${email}) for service "${service || 'Fullstack'}" with budget ${budget}`);
+    console.log(`[DEVGLUT BACKEND] New Brief Received! [${ticketId}] from ${name} (${email}) for "${service || 'Spatial & WebGL'}"`);
 
-    // Return confirmed response
     return res.status(200).json({
       success: true,
       ticket: ticketId,
@@ -58,9 +53,9 @@ export default async function handler(req, res) {
         name,
         email,
         service: service || 'Spatial & WebGL Engineering',
-        budget: budget || '₹1,25,000+'
+        budget: budget || '₹44,999 — ₹99,999+'
       },
-      foundersNotified: ['Farhan Khan', 'Harsh Rawat'],
+      foundersNotified: ['Farhan Khan (Creative Director)', 'Harsh Rawat (Technical Architect)'],
       timestamp
     });
   } catch (error) {

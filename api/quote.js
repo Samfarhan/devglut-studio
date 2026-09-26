@@ -20,10 +20,10 @@ export default async function handler(req, res) {
   try {
     const { screens = 3, tier = 'mvp', currency = 'INR', rush = false } = req.body || {};
 
-    const baseINR = 125000;
+    const baseINR = 44999;
     const baseUSD = 1500;
-    const tierMultipliers = { mvp: 1.0, full: 1.75, enterprise: 2.85 };
-    const tierDays = { mvp: 12, full: 24, enterprise: 45 };
+    const tierMultipliers = { mvp: 0.45, full: 1.0, enterprise: 2.22 };
+    const tierDays = { mvp: 5, full: 14, enterprise: 28 };
 
     const base = currency === 'INR' ? baseINR : baseUSD;
     const multiplier = tierMultipliers[tier] || 1.0;
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
     const rushFactor = rush ? 1.25 : 1.0;
 
     const estimatedTotal = Math.round(base * multiplier * screenFactor * rushFactor);
-    const estimatedDays = rush ? 7 : Math.round((tierDays[tier] || 14) * (screenFactor * 0.8));
+    const estimatedDays = rush ? 4 : Math.round((tierDays[tier] || 14) * (screenFactor * 0.8));
 
     return res.status(200).json({
       success: true,
