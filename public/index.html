@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEVGLUT — Creative Technology Studio | Farhan Khan × Harsh Rawat</title>
+  <meta name="description" content="DEVGLUT is a premier creative engineering studio led by Farhan Khan & Harsh Rawat specializing in 3D Spatial UI, WebGL, high-velocity fullstack architectures, and AI platforms.">
+  <meta name="theme-color" content="#050508">
+
+  <!-- OpenGraph Meta -->
+  <meta property="og:title" content="DEVGLUT — Creative Technology Studio">
+  <meta property="og:description" content="Spatial computing, 3D systems, and high-velocity fullstack software engineering by Farhan Khan & Harsh Rawat.">
+  <meta property="og:type" content="website">
+
+  <!-- Modular CSS Architecture -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <!-- Three.js CDN for GPU-Accelerated 3D WebGL -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Accent Neon Indicator -->
+  <div class="top-glow-bar"></div>
+
+  <!-- Custom Interactive Glowing Cursor -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-dot"></div>
+
+  <!-- Ambient Glowing Canvas & Cyber Grid Background -->
+  <div class="ambient-bg">
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+    <div class="cyber-grid"></div>
+  </div>
+
+  <!-- Floating Studio Navbar -->
+  <nav class="navbar">
+    <a href="#" class="brand-logo">
+      <div class="logo-glyph">D</div>
+      <span>DEVGLUT</span>
+      <span class="logo-badge">STUDIO</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#services">Capabilities</a></li>
+      <li><a href="#pricing">Sprint Calculator</a></li>
+      <li><a href="#founders">Founders</a></li>
+      <li><a href="#contact">Book Sprint</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <!-- Sound FX Toggle Button -->
+      <button class="icon-btn active" id="sound-toggle-btn" title="Toggle UI Sound FX">
+        <span>🔊</span>
+      </button>
+
+      <!-- Terminal CLI Modal Trigger -->
+      <button class="icon-btn" id="btn-open-terminal" title="Launch Developer Terminal (Press ~)">
+        <span style="font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem;">>_</span>
+      </button>
+
+      <!-- Primary Action CTA -->
+      <a href="#contact" class="btn-primary">
+        <span>Book Sprint</span>
+        <span>→</span>
+      </a>
+
+      <!-- Mobile Hamburger -->
+      <button class="mobile-toggle" id="mobile-menu-toggle">☰</button>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-live-badge">
+          <span class="pulse-dot"></span>
+          <span>Q4 2026 SPRINTS ACTIVE — 2 SLOTS OPEN</span>
+        </div>
+
+        <h1 class="hero-title">
+          Spatial 3D UI & <br>
+          <span class="gradient-text">High-Velocity</span> <br>
+          Software Systems.
+        </h1>
+
+        <p class="hero-description">
+          DEVGLUT is an avant-garde creative technology studio founded by <b>Farhan Khan</b> & <b>Harsh Rawat</b>. We engineer GPU-accelerated web experiences, resilient distributed architectures, and bespoke AI platforms.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#pricing" class="btn-primary">
+            <span>Calculate Sprint Scope</span>
+            <span>⚡</span>
+          </a>
+          <button class="btn-secondary" id="hero-open-terminal">
+            <span>Launch Terminal (~ CLI)</span>
+          </button>
+        </div>
+
+        <div class="hero-stats-row">
+          <div class="hero-stat-item">
+            <div class="stat-value">35+</div>
+            <div class="stat-label">Sprints Shipped</div>
+          </div>
+          <div class="hero-stat-item">
+            <div class="stat-value">60 FPS</div>
+            <div class="stat-label">Hardware Render</div>
+          </div>
+          <div class="hero-stat-item">
+            <div class="stat-value">99.98%</div>
+            <div class="stat-label">Uptime Architecture</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Three.js Interactive Monolith -->
+      <div class="hero-canvas-container" id="hero-canvas-container">
+        <div class="canvas-overlay-tag">
+          <span class="pulse-dot"></span>
+          <span>THREE.JS WEBGL RENDERER ACTIVE</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       CAPABILITIES & SERVICES
+       ========================================================================== -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Core Disciplines</span>
+        <h2 class="section-title">Engineered to <span class="gradient-text">Dominate.</span></h2>
+        <p class="section-subtitle">We build beyond conventional templates, designing bespoke software that marries jaw-dropping aesthetics with extreme performance.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 01 -->
+        <div class="service-card reveal-on-scroll">
+          <span class="service-number">01 // VISUAL</span>
+          <div class="service-icon">🌐</div>
+          <h3 class="service-title">3D Spatial & WebGL</h3>
+          <p class="service-desc">Immersive, GPU-accelerated interactive web landscapes with real-time physics, custom GLSL shaders, and 60fps canvas responsive architectures.</p>
+          <div class="service-tech-tags">
+            <span class="tech-tag">Three.js</span>
+            <span class="tech-tag">GLSL Shaders</span>
+            <span class="tech-tag">WebGPU</span>
+            <span class="tech-tag">Blender</span>
+          </div>
+        </div>
+
+        <!-- Service 02 -->
+        <div class="service-card reveal-on-scroll">
+          <span class="service-number">02 // ARCHITECTURE</span>
+          <div class="service-icon">⚡</div>
+          <h3 class="service-title">Fullstack Engineering</h3>
+          <p class="service-desc">High-concurrency cloud backends built on Next.js, React, Node.js, and serverless distributed microservices with guaranteed sub-second latency.</p>
+          <div class="service-tech-tags">
+            <span class="tech-tag">Next.js 14</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">PostgreSQL</span>
+          </div>
+        </div>
+
+        <!-- Service 03 -->
+        <div class="service-card reveal-on-scroll">
+          <span class="service-number">03 // INTELLIGENCE</span>
+          <div class="service-icon">🧠</div>
+          <h3 class="service-title">AI & Agentic Systems</h3>
+          <p class="service-desc">Autonomous enterprise AI agents, automated workflow copilots, real-time vector embeddings, and cognitive business automation pipelines.</p>
+          <div class="service-tech-tags">
+            <span class="tech-tag">Gemini / OpenAI</span>
+            <span class="tech-tag">LangChain</span>
+            <span class="tech-tag">Vector DBs</span>
+            <span class="tech-tag">Edge AI</span>
+          </div>
+        </div>
+
+        <!-- Service 04 -->
+        <div class="service-card reveal-on-scroll">
+          <span class="service-number">04 // IDENTITY</span>
+          <div class="service-icon">💎</div>
+          <h3 class="service-title">Cybernetic Design Systems</h3>
+          <p class="service-desc">Avant-garde brand identities, dark-mode luxury token hierarchies, and interactive micro-animations engineered to command market authority.</p>
+          <div class="service-tech-tags">
+            <span class="tech-tag">Design Tokens</span>
+            <span class="tech-tag">Micro-Interactions</span>
+            <span class="tech-tag">Figma Systems</span>
+            <span class="tech-tag">Motion</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       DYNAMIC SPRINT & PRICING CALCULATOR
+       ========================================================================== -->
+  <section class="calculator-section" id="pricing">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Transparent Investment</span>
+        <h2 class="section-title">Sprint Cost & <span class="gradient-text">Timeline Estimator.</span></h2>
+        <p class="section-subtitle">No opaque agency contracts. Configure your sprint scope below for instant algorithmic pricing and guaranteed delivery dates.</p>
+      </div>
+
+      <div class="calculator-wrapper reveal-on-scroll">
+        <!-- Controls -->
+        <div class="calc-controls">
+          <div class="calc-group">
+            <label>
+              <span>Project Scale / Screens:</span>
+              <span class="calc-value-display" id="calc-scope-display">3 Screens</span>
+            </label>
+            <input type="range" min="1" max="10" value="3" class="custom-range" id="calc-scope-slider">
+          </div>
+
+          <div class="calc-group">
+            <label><span>Sprint Scope Level:</span></label>
+            <div class="sprint-scope-pills">
+              <div class="scope-pill active" data-scope="mvp">MVP Sprint</div>
+              <div class="scope-pill" data-scope="full">Full Product</div>
+              <div class="scope-pill" data-scope="enterprise">Enterprise Flagship</div>
+            </div>
+          </div>
+
+          <div class="calc-group" style="display: flex; align-items: center; gap: 12px;">
+            <input type="checkbox" id="calc-rush-checkbox" style="width: 18px; height: 18px; accent-color: var(--accent-cyan); cursor: pointer;">
+            <label for="calc-rush-checkbox" style="cursor: pointer; margin: 0; font-size: 0.9rem; color: #fff;">
+              ⚡ Expedite Delivery (Rush 7-Day Express Sprint)
+            </label>
+          </div>
+        </div>
+
+        <!-- Real-time Receipt -->
+        <div class="calc-receipt">
+          <div>
+            <div class="receipt-header" style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="mono" style="font-size: 0.8rem; color: var(--accent-cyan);">ESTIMATE_V2.4</span>
+              <div class="currency-toggle">
+                <button class="curr-btn active" data-currency="INR">INR (₹)</button>
+                <button class="curr-btn" data-currency="USD">USD ($)</button>
+              </div>
+            </div>
+
+            <div class="receipt-price-box">
+              <div class="receipt-price gradient-text" id="receipt-price">₹1,25,000</div>
+              <div class="receipt-timeline" id="receipt-timeline">Estimated Timeline: 10 - 14 Days</div>
+            </div>
+
+            <ul class="receipt-features-list" id="receipt-features">
+              <!-- Dynamically populated by calculator.js -->
+            </ul>
+          </div>
+
+          <button class="btn-primary" id="btn-lock-scope" style="width: 100%; justify-content: center; padding: 14px;">
+            <span>Lock Scope & Pre-fill Brief</span>
+            <span>↓</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOUNDERS EDITORIAL SPOTLIGHT
+       ========================================================================== -->
+  <section class="founders-section" id="founders">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Studio Leadership</span>
+        <h2 class="section-title">The Engineers <span class="gradient-text">Behind DEVGLUT.</span></h2>
+        <p class="section-subtitle">Founded and directly led by senior engineers who write code and design every single interface.</p>
+      </div>
+
+      <div class="founders-grid">
+        <!-- Farhan Khan -->
+        <div class="founder-card reveal-on-scroll">
+          <div class="founder-header">
+            <div class="founder-avatar">FK</div>
+            <div>
+              <h3 class="founder-name">Farhan Khan</h3>
+              <div class="founder-role">Founder & Creative Director</div>
+            </div>
+          </div>
+          <p class="founder-bio">
+            Visionary creative technologist specializing in spatial UI, WebGL visual engineering, and cinematic brand identities that capture market dominance.
+          </p>
+          <div class="founder-skills">
+            <span class="skill-badge">Spatial 3D UI</span>
+            <span class="skill-badge">Creative Direction</span>
+            <span class="skill-badge">WebGL / Three.js</span>
+            <span class="skill-badge">Brand Systems</span>
+          </div>
+          <div class="founder-socials">
+            <a href="https://github.com/Samfarhan" target="_blank" class="social-link">GitHub →</a>
+            <a href="https://twitter.com" target="_blank" class="social-link">Twitter / X →</a>
+            <a href="https://linkedin.com" target="_blank" class="social-link">LinkedIn →</a>
+          </div>
+        </div>
+
+        <!-- Harsh Rawat -->
+        <div class="founder-card reveal-on-scroll">
+          <div class="founder-header">
+            <div class="founder-avatar" style="background: var(--grad-primary);">HR</div>
+            <div>
+              <h3 class="founder-name">Harsh Rawat</h3>
+              <div class="founder-role">Co-Founder & Technical Lead</div>
+            </div>
+          </div>
+          <p class="founder-bio">
+            Fullstack systems architect engineering sub-second distributed microservices, ultra-low-latency real-time apps, and enterprise cloud infrastructure.
+          </p>
+          <div class="founder-skills">
+            <span class="skill-badge">Fullstack Systems</span>
+            <span class="skill-badge">Distributed Clouds</span>
+            <span class="skill-badge">Next.js & Node.js</span>
+            <span class="skill-badge">Low-Latency APIs</span>
+          </div>
+          <div class="founder-socials">
+            <a href="https://github.com" target="_blank" class="social-link">GitHub →</a>
+            <a href="https://twitter.com" target="_blank" class="social-link">Twitter / X →</a>
+            <a href="https://linkedin.com" target="_blank" class="social-link">LinkedIn →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INTERACTIVE BRIEF / ACTIVE BACKEND CONTACT
+       ========================================================================== -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Direct Transmission</span>
+        <h2 class="section-title">Initiate Your <span class="gradient-text">Sprint.</span></h2>
+        <p class="section-subtitle">Submit your requirements directly to our active backend. Farhan Khan & Harsh Rawat review all briefs personally within 12 hours.</p>
+      </div>
+
+      <div class="contact-card reveal-on-scroll">
+        <form class="brief-form" id="brief-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="brief-name">Your Full Name *</label>
+              <input type="text" id="brief-name" class="form-input" placeholder="e.g. Alex Morgan" required>
+            </div>
+            <div class="form-group">
+              <label for="brief-email">Email Address *</label>
+              <input type="email" id="brief-email" class="form-input" placeholder="e.g. alex@company.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="brief-service">Engineering Track</label>
+              <select id="brief-service" class="form-select">
+                <option value="3D Spatial & WebGL">3D Spatial & WebGL Experiences</option>
+                <option value="Fullstack Architecture">High-Velocity Fullstack Engineering</option>
+                <option value="AI & Agentic Systems">AI & Generative Platforms</option>
+                <option value="Brand Identity">Cybernetic Brand Design System</option>
+                <option value="Full Custom Sprint">Complete Multi-Disciplinary Sprint</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="brief-budget">Estimated Budget</label>
+              <input type="text" id="brief-budget" class="form-input" placeholder="e.g. ₹1,25,000+ or $1,500+">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="brief-desc">Project Overview & Objectives</label>
+            <textarea id="brief-desc" class="form-textarea" placeholder="Tell us about what you want to build, current challenges, and timeline goals..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" id="btn-submit-brief" style="justify-content: center; padding: 16px; font-size: 0.95rem;">
+            <span>⚡ Transmit Brief to Studio Backend</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       DEVELOPER TERMINAL MODAL (Triggered by '~' or buttons)
+       ========================================================================== -->
+  <div class="terminal-modal-backdrop" id="terminal-modal">
+    <div class="terminal-window">
+      <div class="scanline-effect"></div>
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <div class="terminal-dot dot-red"></div>
+          <div class="terminal-dot dot-yellow"></div>
+          <div class="terminal-dot dot-green"></div>
+        </div>
+        <div class="terminal-title">devglut-os v2.4 (telemetry-active)</div>
+        <button class="terminal-close" id="terminal-close-btn" title="Close Terminal">✕</button>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div style="color: #60a5fa; margin-bottom: 8px;">
+          DEVGLUT STUDIO OPERATING SYSTEM [Kernel 6.1.4-devglut]<br>
+          Connected to Edge Node | Founders: Farhan Khan × Harsh Rawat<br>
+          Type '<span style="color: #00f0ff;">help</span>' to list available studio commands.
+        </div>
+        <div class="terminal-prompt-row">
+          <span class="terminal-prefix">farhan@devglut-os:~$</span>
+          <input type="text" class="terminal-input" id="terminal-input" spellcheck="false" autocomplete="off" autofocus>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Studio Footer -->
+  <footer class="studio-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand-logo">
+          <div class="logo-glyph">D</div>
+          <span>DEVGLUT</span>
+          <span class="logo-badge">STUDIO</span>
+        </div>
+        <p>Premium Creative Technology & Spatial Engineering Studio founded by Farhan Khan & Harsh Rawat. Engineered with passion and precision.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="#services">Capabilities</a></li>
+          <li><a href="#pricing">Sprint Pricing</a></li>
+          <li><a href="#founders">Founders</a></li>
+          <li><a href="#contact">Book Sprint</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Developer Tools</h4>
+        <ul class="footer-links">
+          <li><a href="javascript:void(0)" id="footer-open-terminal">Launch CLI Terminal (~ )</a></li>
+          <li><a href="/api/status" target="_blank">Live Backend Status (/api/status)</a></li>
+          <li><a href="https://github.com/Samfarhan/devglut-studio" target="_blank">GitHub Repository</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>© 2026 DEVGLUT STUDIO. All Rights Reserved.</div>
+      <div>Designed & Engineered by Farhan Khan × Harsh Rawat</div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container"></div>
+
+  <!-- Main ES6 Modular Coordinator -->
+  <script type="module" src="js/main.js"></script>
+
+  <!-- Connect Hero secondary terminal button -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const heroBtn = document.getElementById('hero-open-terminal');
+      const termModal = document.getElementById('terminal-modal');
+      const termInput = document.getElementById('terminal-input');
+      if (heroBtn && termModal && termInput) {
+        heroBtn.addEventListener('click', () => {
+          termModal.classList.add('open');
+          termInput.focus();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
