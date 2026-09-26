@@ -5421,137 +5421,421 @@
       });
     });
 
-    // 4. DEVGLUT × FLOWSTACK ATMOSPHERIC FLUID & SPATIAL CANVAS
-    (function initHeroFlowCanvas() {
+    // 4. SIGNATURE 3D NEURAL BRAIN CONSTELLATION ENGINE
+    // Inspired by Dala reference: chromatic outlined triangular particles forming an organic brain
+    (function init3DNeuralBrainConstellation() {
       const canvas = document.getElementById('hero-flow-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      let w, h;
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+
       function resize() {
         w = canvas.width = window.innerWidth;
         h = canvas.height = window.innerHeight;
       }
       window.addEventListener('resize', resize);
-      resize();
 
-      let mouseX = w / 2;
-      let mouseY = h / 2;
-      let targetX = mouseX;
-      let targetY = mouseY;
+      // Mouse tracking with smooth spring inertia
+      let mouseX = 0, mouseY = 0;
+      let targetRotX = 0.22, targetRotY = 0;
+      let rotX = 0.22, rotY = 0;
+      let isInteracting = false;
 
       window.addEventListener('mousemove', (e) => {
-        targetX = e.clientX;
-        targetY = e.clientY;
+        const normX = (e.clientX / w - 0.5) * 2;
+        const normY = (e.clientY / h - 0.5) * 2;
+        targetRotY = normX * 0.95;
+        targetRotX = 0.22 - normY * 0.55;
+      }, { passive: true });
+
+      // Click shockwave pulse
+      let shockwaveRadius = -1;
+      let shockwaveCenter = { x: 0, y: 0, z: 0 };
+      canvas.addEventListener('click', (e) => {
+        shockwaveRadius = 0;
+        shockwaveCenter = { x: (Math.random() - 0.5) * 80, y: (Math.random() - 0.5) * 80, z: (Math.random() - 0.5) * 60 };
+        if (typeof playAudio === 'function') playAudio('hover');
       });
 
-      // 48 Smooth Ambient Dust & Stardust Particles
-      const particles = [];
-      for (let i = 0; i < 48; i++) {
-        particles.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.35,
-          vy: (Math.random() - 0.5) * 0.35,
-          radius: Math.random() * 1.8 + 0.8,
-          alpha: Math.random() * 0.45 + 0.15,
-          color: Math.random() > 0.45 ? '52, 211, 153' : '200, 180, 160'
+      // Chromatic Palette from Dala Style Reference:
+      // Electric Iris (#8052ff), Saffron Spark (#ffb829), Deep Verdant & Emerald (#34d399, #15846e),
+      // Cyber Blue (#00f0ff), Radiant Magenta (#d946ef), Bone White (#ffffff)
+      const CHROMATIC_PALETTE = [
+        { r: 128, g: 82,  b: 255 }, // Electric Iris Violet
+        { r: 255, g: 184, b: 41  }, // Saffron Spark Amber
+        { r: 52,  g: 211, b: 153 }, // Emerald Studio Green
+        { r: 21,  g: 132, b: 110 }, // Deep Verdant Teal
+        { r: 0,   g: 240, b: 255 }, // Cyber Blue
+        { r: 217, g: 70,  b: 239 }, // Radiant Magenta
+        { r: 255, g: 255, b: 255 }, // Bone White
+        { r: 200, g: 180, b: 160 }  // Champagne Accent
+      ];
+
+      // 1. Generate Organic 3D Brain Point-Cloud (Dual Hemispheres, Lobes, Gyri/Sulci Convolutions)
+      const NUM_BRAIN_NODES = 2400;
+      const brainNodes = [];
+
+      for (let i = 0; i < NUM_BRAIN_NODES; i++) {
+        // Choose hemisphere: -1 (Left), +1 (Right)
+        const side = Math.random() > 0.5 ? 1 : -1;
+        
+        // Polar coordinates on hemisphere
+        const theta = Math.acos(1 - 2 * Math.random()); // 0 to PI
+        const phi = (Math.random() * 0.96) * Math.PI - (Math.PI * 0.48); // lateral sweep
+
+        // Anatomical Ellipsoid Radii
+        const Rx = 118; // Width per hemisphere
+        const Ry = 158; // Front-to-back length
+        const Rz = 112; // Height
+
+        // Base coordinates
+        let bx = Math.sin(theta) * Math.cos(phi) * Rx;
+        let by = Math.sin(theta) * Math.sin(phi) * Ry;
+        let bz = Math.cos(theta) * Rz;
+
+        // Shift hemisphere apart slightly for central longitudinal fissure
+        bx = (Math.abs(bx) + 24) * side;
+
+        // Anatomical shape modifications:
+        // A. Longitudinal fissure indentation (narrow valley along x = 0)
+        const fissureIndent = 1 - 0.28 * Math.exp(-Math.pow(bx / 38, 2));
+        bx *= fissureIndent;
+
+        // B. Frontal lobe vs Occipital lobe shaping
+        if (by > 0) {
+          // Frontal: slightly lifted and round
+          bz += 8 * (by / Ry);
+        } else {
+          // Occipital: tapers down at posterior base
+          bz -= 12 * Math.pow(Math.abs(by / Ry), 1.8);
+          bx *= (1 - 0.15 * Math.pow(Math.abs(by / Ry), 1.5));
+        }
+
+        // C. Temporal Lobe (lateral bulge on lower side)
+        if (bz < 10 && Math.abs(bx) > 50) {
+          bx *= 1.14;
+          by *= 1.05;
+        }
+
+        // D. Cortical Gyri and Sulci (Organic brain surface ripples)
+        const ripple = 1.0 +
+          0.13 * Math.sin(5.5 * theta) * Math.cos(4.2 * phi) +
+          0.08 * Math.sin(9.8 * theta) * Math.sin(7.5 * phi) +
+          0.05 * Math.cos(14.0 * phi);
+
+        bx *= ripple;
+        by *= ripple;
+        bz *= ripple;
+
+        // Volume vs Surface crust (82% surface cortex, 18% deep neural core)
+        const isCortex = Math.random() < 0.82;
+        const radialDepth = isCortex ? (0.88 + Math.random() * 0.16) : (0.2 + Math.random() * 0.68);
+
+        bx *= radialDepth;
+        by *= radialDepth;
+        bz *= radialDepth;
+
+        // Pick distinct chromatic color
+        const colorObj = CHROMATIC_PALETTE[Math.floor(Math.random() * CHROMATIC_PALETTE.length)];
+
+        brainNodes.push({
+          x0: bx, y0: by, z0: bz,
+          x: bx, y: by, z: bz,
+          baseColor: colorObj,
+          size: Math.random() * 2.2 + 1.8, // Tiny triangle radius (1.8 - 4px)
+          rot: Math.random() * Math.PI * 2,
+          rotSpeed: (Math.random() - 0.5) * 0.04,
+          oscFreq: Math.random() * 2.5 + 1.0,
+          oscPhase: Math.random() * Math.PI * 2,
+          isCortex: isCortex,
+          pulseExcitement: 0,
+          connections: [] // neighbor node indices for filaments
         });
+      }
+
+      // Precompute nearest neighbor connections for neural synaptic filaments
+      for (let i = 0; i < brainNodes.length; i += 2) {
+        const nodeA = brainNodes[i];
+        let found = 0;
+        for (let j = i + 1; j < brainNodes.length; j++) {
+          const nodeB = brainNodes[j];
+          const d = Math.hypot(nodeA.x0 - nodeB.x0, nodeA.y0 - nodeB.y0, nodeA.z0 - nodeB.z0);
+          if (d < 32 && d > 6) {
+            nodeA.connections.push(j);
+            found++;
+            if (found >= 2) break; // keep network lightweight and clean
+          }
+        }
+      }
+
+      // 2. Active Neural Impulses (Action Potentials firing through network)
+      const NUM_IMPULSES = 18;
+      const neuralImpulses = [];
+      for (let i = 0; i < NUM_IMPULSES; i++) {
+        neuralImpulses.push({
+          fromIndex: Math.floor(Math.random() * brainNodes.length),
+          toIndex: Math.floor(Math.random() * brainNodes.length),
+          progress: Math.random(),
+          speed: Math.random() * 0.02 + 0.015,
+          color: CHROMATIC_PALETTE[Math.floor(Math.random() * CHROMATIC_PALETTE.length)]
+        });
+      }
+
+      // 3. Ambient Scattered Outlined Triangles (Floating on Black Velvet Void)
+      const NUM_AMBIENT = 140;
+      const ambientTriangles = [];
+      for (let i = 0; i < NUM_AMBIENT; i++) {
+        ambientTriangles.push({
+          x: (Math.random() - 0.5) * 2200,
+          y: (Math.random() - 0.5) * 1400,
+          z: (Math.random() - 0.5) * 1200,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          vz: (Math.random() - 0.5) * 0.3,
+          size: Math.random() * 3.5 + 2.0,
+          rot: Math.random() * Math.PI * 2,
+          rotSpeed: (Math.random() - 0.5) * 0.02,
+          color: CHROMATIC_PALETTE[Math.floor(Math.random() * CHROMATIC_PALETTE.length)],
+          alpha: Math.random() * 0.35 + 0.12
+        });
+      }
+
+      // Helper to draw sharp outlined equilateral triangle glyph
+      function drawOutlinedTriangle(context, cx, cy, radius, angle, strokeColor, fillColor) {
+        const a1 = angle;
+        const a2 = angle + 2.094395; // + 120 deg
+        const a3 = angle + 4.18879;  // + 240 deg
+
+        const x1 = cx + radius * Math.cos(a1);
+        const y1 = cy + radius * Math.sin(a1);
+        const x2 = cx + radius * Math.cos(a2);
+        const y2 = cy + radius * Math.sin(a2);
+        const x3 = cx + radius * Math.cos(a3);
+        const y3 = cy + radius * Math.sin(a3);
+
+        context.beginPath();
+        context.moveTo(x1, y1);
+        context.lineTo(x2, y2);
+        context.lineTo(x3, y3);
+        context.closePath();
+
+        if (fillColor) {
+          context.fillStyle = fillColor;
+          context.fill();
+        }
+        context.strokeStyle = strokeColor;
+        context.lineWidth = 1.25;
+        context.stroke();
       }
 
       let time = 0;
 
-      function draw() {
-        time += 0.012;
-        mouseX += (targetX - mouseX) * 0.04;
-        mouseY += (targetY - mouseY) * 0.04;
+      // Animation Loop
+      function renderBrain() {
+        time += 0.014;
+
+        // Smooth rotation damping
+        rotY += (targetRotY - rotY) * 0.045;
+        rotX += (targetRotX - rotX) * 0.045;
+
+        // Subtle continuous auto-rotation
+        const currentYaw = rotY + time * 0.22;
+        const currentPitch = rotX + Math.sin(time * 0.35) * 0.08;
+        const currentRoll = Math.cos(time * 0.25) * 0.05;
+
+        // Trigonometric rotation matrices
+        const cosY = Math.cos(currentYaw), sinY = Math.sin(currentYaw);
+        const cosP = Math.cos(currentPitch), sinP = Math.sin(currentPitch);
+        const cosR = Math.cos(currentRoll), sinR = Math.sin(currentRoll);
 
         ctx.clearRect(0, 0, w, h);
 
-        const mouseOffsetNormY = (mouseY / h - 0.5);
+        // Responsive Center Anchor (slightly elevated for majestic hero framing)
+        const centerX = w * 0.5;
+        const centerY = h * 0.52;
+        const fov = Math.min(w, h) * 0.88; // Perspective Camera Distance
+        const cameraZ = 520;
 
-        // 1. Primary Flowing Emerald Liquid Horizon Ribbon
-        ctx.beginPath();
-        ctx.strokeStyle = 'rgba(52, 211, 153, 0.18)';
-        ctx.lineWidth = 1.8;
-        for (let x = 0; x <= w; x += 14) {
-          const wave1 = Math.sin(x * 0.0022 + time) * 45;
-          const wave2 = Math.cos(x * 0.0014 - time * 0.8) * 30;
-          const y = h * 0.58 + wave1 + wave2 + mouseOffsetNormY * 36;
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
+        // Shockwave expansion
+        if (shockwaveRadius >= 0) {
+          shockwaveRadius += 7.5;
+          if (shockwaveRadius > 450) shockwaveRadius = -1;
         }
-        ctx.stroke();
 
-        // 2. Secondary Warm Champagne Bronze Flowing Ribbon
-        ctx.beginPath();
-        ctx.strokeStyle = 'rgba(200, 180, 160, 0.14)';
-        ctx.lineWidth = 1.4;
-        for (let x = 0; x <= w; x += 14) {
-          const wave1 = Math.cos(x * 0.0018 + time * 0.85) * 38;
-          const wave2 = Math.sin(x * 0.0028 - time * 0.6) * 24;
-          const y = h * 0.64 + wave1 + wave2 + mouseOffsetNormY * 26;
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
+        // --- A. Render Ambient Drifting Outlined Triangles in Background ---
+        for (let i = 0; i < ambientTriangles.length; i++) {
+          const at = ambientTriangles[i];
+          at.x += at.vx;
+          at.y += at.vy;
+          at.z += at.vz;
+          at.rot += at.rotSpeed;
 
-        // 3. Tertiary Subtle Ambient Glow Ribbon
-        ctx.beginPath();
-        ctx.strokeStyle = 'rgba(45, 212, 191, 0.08)';
-        ctx.lineWidth = 1.2;
-        for (let x = 0; x <= w; x += 16) {
-          const wave = Math.sin(x * 0.0016 - time * 1.1) * 32;
-          const y = h * 0.52 + wave + mouseOffsetNormY * 18;
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
+          // Boundary wraps
+          if (at.x < -1100) at.x = 1100;
+          if (at.x > 1100) at.x = -1100;
+          if (at.y < -700) at.y = 700;
+          if (at.y > 700) at.y = -700;
+          if (at.z < -600) at.z = 600;
+          if (at.z > 600) at.z = -600;
 
-        // 4. Ambient Floating Dust Particles with Micro-Filaments
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-          p.x += p.vx;
-          p.y += p.vy;
+          const pz = at.z + cameraZ;
+          if (pz > 30) {
+            const scale = fov / pz;
+            const px = centerX + at.x * scale;
+            const py = centerY + at.y * scale;
 
-          if (p.x < 0) p.x = w;
-          if (p.x > w) p.x = 0;
-          if (p.y < 0) p.y = h;
-          if (p.y > h) p.y = 0;
-
-          // Gentle mouse attraction
-          const dx = mouseX - p.x;
-          const dy = mouseY - p.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 160) {
-            p.x += (dx / dist) * 0.35;
-            p.y += (dy / dist) * 0.35;
-          }
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${p.color}, ${p.alpha})`;
-          ctx.fill();
-
-          // Filaments connecting close particles
-          for (let j = i + 1; j < particles.length; j++) {
-            const p2 = particles[j];
-            const d = Math.hypot(p.x - p2.x, p.y - p2.y);
-            if (d < 90) {
-              ctx.beginPath();
-              ctx.strokeStyle = `rgba(200, 180, 160, ${0.12 * (1 - d / 90)})`;
-              ctx.lineWidth = 0.6;
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(p2.x, p2.y);
-              ctx.stroke();
+            if (px >= -20 && px <= w + 20 && py >= -20 && py <= h + 20) {
+              const alpha = Math.min(1, Math.max(0.08, at.alpha * (scale * 0.8)));
+              const strokeStyle = `rgba(${at.color.r}, ${at.color.g}, ${at.color.b}, ${alpha})`;
+              drawOutlinedTriangle(ctx, px, py, at.size * scale, at.rot, strokeStyle, null);
             }
           }
         }
 
-        requestAnimationFrame(draw);
+        // --- B. 3D Project & Transform Brain Constellation Nodes ---
+        const projectedNodes = new Array(brainNodes.length);
+
+        for (let i = 0; i < brainNodes.length; i++) {
+          const n = brainNodes[i];
+          n.rot += n.rotSpeed;
+
+          // Subtle organic breathing oscillation
+          const breathe = 1.0 + Math.sin(time * n.oscFreq + n.oscPhase) * 0.024;
+          let nx = n.x0 * breathe;
+          let ny = n.y0 * breathe;
+          let nz = n.z0 * breathe;
+
+          // Shockwave excitation
+          if (shockwaveRadius >= 0) {
+            const distFromShock = Math.hypot(nx - shockwaveCenter.x, ny - shockwaveCenter.y, nz - shockwaveCenter.z);
+            if (Math.abs(distFromShock - shockwaveRadius) < 35) {
+              n.pulseExcitement = 1.0;
+            }
+          }
+          if (n.pulseExcitement > 0) {
+            n.pulseExcitement *= 0.94;
+          }
+
+          // 3D Rotation: Yaw (Y-axis)
+          let x1 = nx * cosY + nz * sinY;
+          let y1 = ny;
+          let z1 = -nx * sinY + nz * cosY;
+
+          // Pitch (X-axis)
+          let x2 = x1;
+          let y2 = y1 * cosP - z1 * sinP;
+          let z2 = y1 * sinP + z1 * cosP;
+
+          // Roll (Z-axis)
+          let x3 = x2 * cosR - y2 * sinR;
+          let y3 = x2 * sinR + y2 * cosR;
+          let z3 = z2;
+
+          // Camera Perspective Projection
+          const pz = z3 + cameraZ;
+          const scale = fov / Math.max(30, pz);
+          const px = centerX + x3 * scale;
+          const py = centerY + y3 * scale;
+
+          projectedNodes[i] = {
+            px: px,
+            py: py,
+            pz: pz,
+            scale: scale,
+            depthAlpha: Math.min(1, Math.max(0.15, (z3 + 220) / 440)),
+            node: n
+          };
+        }
+
+        // --- C. Render Synaptic Neural Filaments ---
+        ctx.lineWidth = 0.8;
+        for (let i = 0; i < brainNodes.length; i += 2) {
+          const pA = projectedNodes[i];
+          if (!pA) continue;
+          const conns = pA.node.connections;
+
+          for (let c = 0; c < conns.length; c++) {
+            const j = conns[c];
+            const pB = projectedNodes[j];
+            if (!pB) continue;
+
+            const avgAlpha = (pA.depthAlpha + pB.depthAlpha) * 0.5;
+            const filamentAlpha = (pA.node.pulseExcitement + pB.node.pulseExcitement > 0.2)
+              ? 0.75
+              : 0.12 * avgAlpha;
+
+            ctx.strokeStyle = `rgba(128, 82, 255, ${filamentAlpha})`;
+            ctx.beginPath();
+            ctx.moveTo(pA.px, pA.py);
+            ctx.lineTo(pB.px, pB.py);
+            ctx.stroke();
+          }
+        }
+
+        // --- D. Update & Draw Neural Impulses (Action Potentials) ---
+        for (let i = 0; i < neuralImpulses.length; i++) {
+          const imp = neuralImpulses[i];
+          imp.progress += imp.speed;
+
+          if (imp.progress >= 1.0) {
+            imp.progress = 0;
+            imp.fromIndex = imp.toIndex;
+            const neighborConns = brainNodes[imp.fromIndex].connections;
+            if (neighborConns.length > 0) {
+              imp.toIndex = neighborConns[Math.floor(Math.random() * neighborConns.length)];
+            } else {
+              imp.toIndex = Math.floor(Math.random() * brainNodes.length);
+            }
+            brainNodes[imp.fromIndex].pulseExcitement = 1.0;
+          }
+
+          const nA = projectedNodes[imp.fromIndex];
+          const nB = projectedNodes[imp.toIndex];
+          if (nA && nB) {
+            const ix = nA.px + (nB.px - nA.px) * imp.progress;
+            const iy = nA.py + (nB.py - nA.py) * imp.progress;
+            const isize = 2.4 * nA.scale;
+
+            ctx.beginPath();
+            ctx.arc(ix, iy, isize, 0, Math.PI * 2);
+            ctx.fillStyle = `rgb(${imp.color.r}, ${imp.color.g}, ${imp.color.b})`;
+            ctx.shadowColor = `rgb(${imp.color.r}, ${imp.color.g}, ${imp.color.b})`;
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+        }
+
+        // --- E. Render Constellation Outlined Triangular Glyphs (Depth-Sorted) ---
+        // Sort by Z for true 3D visual layering
+        projectedNodes.sort((a, b) => a.pz - b.pz);
+
+        for (let i = 0; i < projectedNodes.length; i++) {
+          const p = projectedNodes[i];
+          const n = p.node;
+          const col = n.baseColor;
+          
+          let alpha = p.depthAlpha;
+          let fillCol = null;
+          let nodeRadius = n.size * p.scale;
+
+          if (n.pulseExcitement > 0.1) {
+            alpha = Math.min(1.0, alpha + n.pulseExcitement * 0.85);
+            fillCol = `rgba(${col.r}, ${col.g}, ${col.b}, ${n.pulseExcitement * 0.65})`;
+            nodeRadius *= (1 + n.pulseExcitement * 0.4);
+          }
+
+          const strokeStyle = `rgba(${col.r}, ${col.g}, ${col.b}, ${alpha})`;
+          drawOutlinedTriangle(ctx, p.px, p.py, nodeRadius, n.rot, strokeStyle, fillCol);
+        }
+
+        requestAnimationFrame(renderBrain);
       }
-      draw();
+
+      renderBrain();
     })();
 
     // 5. HIGH-END BESPOKE DIGITAL PRODUCT SHOWCASE PREVIEWS
