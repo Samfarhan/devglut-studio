@@ -1,0 +1,74 @@
+/* ==========================================================================
+   DEVGLUT STUDIO — DESIGN TOKENS & SYSTEM VARIABLES
+   Created for: Farhan Khan × Harsh Rawat
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Deep Void & Cyber Neons */
+  --bg-dark: #050508;
+  --bg-surface: #0a0a12;
+  --bg-card: rgba(14, 14, 24, 0.75);
+  --bg-card-hover: rgba(22, 22, 38, 0.85);
+  --bg-glass: rgba(10, 10, 18, 0.65);
+  --bg-input: rgba(16, 16, 28, 0.9);
+
+  /* Brand Accents */
+  --accent-blue: #0055ff;
+  --accent-cyan: #00f0ff;
+  --accent-purple: #8a2be2;
+  --accent-magenta: #ff007f;
+  --accent-green: #00ff88;
+
+  /* Gradients */
+  --grad-primary: linear-gradient(135deg, #0055ff 0%, #00f0ff 100%);
+  --grad-cyber: linear-gradient(135deg, #8a2be2 0%, #0055ff 50%, #00f0ff 100%);
+  --grad-glow: radial-gradient(circle, rgba(0, 85, 255, 0.15) 0%, transparent 70%);
+  --grad-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  --grad-border: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 100%);
+  --grad-border-active: linear-gradient(135deg, #0055ff, #00f0ff);
+
+  /* Typography Colors */
+  --text-main: #f0f2ff;
+  --text-muted: #8b92b0;
+  --text-faint: #4d5475;
+  --text-inverse: #050508;
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.15);
+  --border-neon: rgba(0, 240, 255, 0.35);
+
+  /* Shadows & Glows */
+  --glow-blue: 0 0 35px rgba(0, 85, 255, 0.35);
+  --glow-cyan: 0 0 30px rgba(0, 240, 255, 0.3);
+  --glow-purple: 0 0 35px rgba(138, 43, 226, 0.3);
+  --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  --shadow-elevated: 0 30px 60px -20px rgba(0, 0, 0, 0.9);
+
+  /* Spacing Scale */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 128px;
+
+  /* Layout */
+  --container-max: 1240px;
+  --nav-height: 80px;
+
+  /* Typography Families */
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Syne', var(--font-sans);
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  /* Animation Timings */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --transition-fast: 0.2s var(--ease-out-expo);
+  --transition-normal: 0.35s var(--ease-out-expo);
+  --transition-slow: 0.6s var(--ease-out-expo);
+}
