@@ -1,0 +1,105 @@
+/* ==========================================================================
+   DEVGLUT STUDIO — 60FPS KEYFRAME ANIMATIONS & GLOW EFFECTS
+   ========================================================================== */
+
+/* Live Indicator Pulse */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 255, 136, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 136, 0);
+  }
+}
+
+/* Cyber Glow Breathing */
+@keyframes cyber-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(0, 85, 255, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.8));
+  }
+}
+
+/* Floating Geometric Float */
+@keyframes float-y {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Terminal Scanline */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+/* Shimmer Highlight */
+@keyframes shimmer-sweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Fade in up reveal class */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Subtle border glow animation */
+.glow-border-animate {
+  position: relative;
+}
+.glow-border-animate::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #0055ff, #00f0ff, #8a2be2, #0055ff);
+  background-size: 300% 300%;
+  animation: shimmer-sweep 8s linear infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.glow-border-animate:hover::before {
+  opacity: 1;
+}
+
+/* Terminal Scanline Overlay */
+.scanline-effect {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 6px 100%;
+  opacity: 0.6;
+}
