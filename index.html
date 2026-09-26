@@ -2609,9 +2609,10 @@
     /* 3D Hardware-Accelerated Scroll Reveals */
     .reveal {
       opacity: 0;
-      transform: translate3d(0, 20px, 0);
-      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: perspective(1200px) translateY(36px) translateZ(-30px) rotateX(5deg);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
+      transform-style: preserve-3d;
     }
 
     .slide-left {
@@ -2634,7 +2635,7 @@
     .slide-left.active,
     .slide-right.active {
       opacity: 1 !important;
-      transform: translate3d(0, 0, 0) !important;
+      transform: perspective(1200px) translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) !important;
     }
 
     /* ==========================================================================
@@ -2965,308 +2966,7 @@
       font-family: var(--font-mono);
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85);
     }
-  
-    /* ==========================================================================
-       SMOOTH INERTIA SCROLL & UPGRADED SHOWCASE PORTFOLIO STYLING
-       ========================================================================== */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Hardware-accelerated Smooth Reveals */
-    .reveal {
-      opacity: 0;
-      transform: translate3d(0, 32px, 0);
-      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
-    }
-
-    .reveal.active {
-      opacity: 1 !important;
-      transform: translate3d(0, 0, 0) !important;
-    }
-
-    /* Filter Tabs for Showcase Portfolio */
-    .showcase-filter-tabs {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 32px 0 16px;
-    }
-
-    .showcase-filter-btn {
-      padding: 8px 18px;
-      border-radius: 9999px;
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: rgba(255, 255, 255, 0.7);
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .showcase-filter-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(52, 211, 153, 0.4);
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
-
-    .showcase-filter-btn.active {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(52, 211, 153, 0.1) 100%);
-      border-color: var(--color-emerald-400);
-      color: #ffffff;
-      box-shadow: 0 0 20px rgba(52, 211, 153, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-    }
-
-    .filter-count {
-      font-size: 10px;
-      opacity: 0.65;
-      padding: 1px 6px;
-      border-radius: 9999px;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    /* Showcase Card Upgrades */
-    .showcase-card {
-      border-radius: 24px;
-      background: rgba(10, 13, 10, 0.78);
-      backdrop-filter: blur(32px) saturate(200%);
-      -webkit-backdrop-filter: blur(32px) saturate(200%);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      position: relative;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.15);
-      will-change: transform, border-color, box-shadow;
-    }
-
-    .showcase-card:hover {
-      border-color: rgba(52, 211, 153, 0.48);
-      box-shadow: 0 32px 75px -10px rgba(0, 0, 0, 0.95), 0 0 32px rgba(16, 185, 129, 0.18), inset 0 1px 2px rgba(255, 255, 255, 0.3);
-      transform: translateY(-5px);
-    }
-
-    .showcase-top-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 20px;
-      background: rgba(0, 0, 0, 0.55);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      font-family: var(--font-mono);
-      font-size: 11px;
-    }
-
-    .meta-status-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--color-emerald-400);
-      letter-spacing: 0.06em;
-    }
-
-    .meta-release-tag {
-      color: var(--color-sand);
-      opacity: 0.75;
-      letter-spacing: 0.05em;
-    }
-
-    .showcase-preview-frame {
-      height: 260px;
-      background: radial-gradient(circle at 50% 50%, #0d120f 0%, #030403 100%);
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .preview-canvas-3d {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-      cursor: crosshair;
-    }
-
-    .showcase-badge-pill {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      z-index: 10;
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      padding: 5px 12px;
-      border-radius: 9999px;
-      background: rgba(4, 6, 4, 0.82);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(52, 211, 153, 0.35);
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-    }
-
-    .showcase-body {
-      padding: 28px 28px 24px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .showcase-tags {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .showcase-tag {
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      padding: 4px 10px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      color: rgba(255, 255, 255, 0.7);
-      transition: all 0.2s;
-    }
-
-    .showcase-card:hover .showcase-tag {
-      border-color: rgba(52, 211, 153, 0.25);
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    .showcase-metrics-bar {
-      margin: 20px 0;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      background: rgba(4, 6, 4, 0.65);
-      padding: 14px 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
-    }
-
-    .metric-col {
-      text-align: left;
-    }
-
-    .metric-val {
-      font-family: var(--font-mono);
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--color-emerald-400);
-      text-shadow: 0 0 12px rgba(52, 211, 153, 0.4);
-    }
-
-    .metric-lbl {
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.5);
-      margin-top: 2px;
-      letter-spacing: -0.01em;
-    }
-
-    .showcase-actions {
-      display: flex;
-      gap: 12px;
-      margin-top: auto;
-      padding-top: 8px;
-    }
-
-    .btn-blueprint {
-      flex: 1.2;
-      height: 44px;
-      font-size: 13px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      color: #ffffff;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .btn-blueprint:hover {
-      background: rgba(52, 211, 153, 0.14);
-      border-color: var(--color-emerald-400);
-      box-shadow: 0 0 20px rgba(52, 211, 153, 0.25);
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
-
-    .btn-scope {
-      flex: 0.9;
-      height: 44px;
-      font-size: 13px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%);
-      border: none;
-      color: #000000;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 0 18px rgba(16, 185, 129, 0.4), inset 0 1px 1px #fff;
-    }
-
-    .btn-scope:hover {
-      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-      box-shadow: 0 0 28px rgba(16, 185, 129, 0.65), inset 0 1px 1px #fff;
-      transform: translateY(-1px);
-    }
-
-    /* Showcase Technical Telemetry Footer Strip */
-    .showcase-telemetry-banner {
-      margin-top: 48px;
-      padding: 16px 24px;
-      border-radius: 16px;
-      background: rgba(8, 10, 8, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-    }
-
-    .telemetry-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    .telemetry-item strong {
-      color: var(--color-emerald-400);
-      font-weight: 600;
-    }
-</style>
+  </style>
 </head>
 <body>
 
@@ -4086,58 +3786,35 @@
     <!-- ==========================================================================
          FLAGSHIP SHOWCASE PORTFOLIO (WITH LIVE 3D MICRO-CANVASES)
          ========================================================================== -->
-        <section id="showcase" class="showcase-section">
+    <section id="showcase" class="showcase-section">
       <div class="ambient-wrap">
         <div class="ambient-blob-1"></div>
         <div class="ambient-blob-2"></div>
       </div>
 
       <div class="section-wrap" style="position: relative; z-index: 2;">
-        <div class="reveal" style="max-width: 760px;">
+        <div class="reveal" style="max-width: 720px;">
           <div class="section-eyebrow">
-            <div class="eyebrow-line"></div>Curated Production Benchmarks
+            <div class="eyebrow-line"></div>Curated Portfolio
           </div>
           <h2 class="section-heading">
-            Selected <em class="serif-accent">systems</em> &amp; production builds
+            Selected <em class="serif-accent">systems</em> & production builds
           </h2>
           <p class="section-sub">
-            Flagship spatial 3D architectures, autonomous AI cognitive topologies, and sub-millisecond edge systems engineered and deployed by Farhan Khan &amp; Harsh Rawat.
+            Flagship spatial architectures, applied AI cognitive topologies, and sub-millisecond edge systems engineered by Farhan Khan & Harsh Rawat.
           </p>
-
-          <!-- Interactive Category Filter Tabs -->
-          <div class="showcase-filter-tabs">
-            <button class="showcase-filter-btn active" onclick="filterShowcase('all', this)">
-              <span>All Architectures</span>
-              <span class="filter-count">4</span>
-            </button>
-            <button class="showcase-filter-btn" onclick="filterShowcase('3d', this)">
-              <span>3D Spatial &amp; WebGL</span>
-              <span class="filter-count">2</span>
-            </button>
-            <button class="showcase-filter-btn" onclick="filterShowcase('ai', this)">
-              <span>Autonomous AI &amp; RAG</span>
-              <span class="filter-count">1</span>
-            </button>
-            <button class="showcase-filter-btn" onclick="filterShowcase('edge', this)">
-              <span>Edge &amp; High-Throughput</span>
-              <span class="filter-count">1</span>
-            </button>
-          </div>
         </div>
 
-        <div class="grid-showcase" id="showcase-grid-items">
+        <div class="grid-showcase">
           
-          <!-- Project 1: CYBERSPATIAL // 3D WebGL Spatial Configurator -->
-          <div class="reveal showcase-item" data-category="3d" onmouseenter="speedUpPreview(0, true)" onmouseleave="speedUpPreview(0, false)">
+          <!-- Project 1: CYBERSPATIAL // 3D WebGL Configurator -->
+          <div class="reveal tilt-card-wrapper" onmouseenter="speedUpPreview(0, true)" onmouseleave="speedUpPreview(0, false)">
             <div class="showcase-card spotlight-card">
-              <!-- Top System Metadata Strip -->
-              <div class="showcase-top-meta">
-                <span class="meta-status-chip">
-                  <span class="sonar-beacon" style="width: 7px; height: 7px;"><span class="sonar-wave"></span><span class="sonar-dot" style="width: 5px; height: 5px;"></span></span>
-                  LIVE PRODUCTION ENGINE
-                </span>
-                <span class="meta-release-tag">COMMISSION // 2026</span>
-              </div>
+              <div class="glass-glare"></div>
+              <div class="hud-bracket hud-bracket-tl"></div>
+              <div class="hud-bracket hud-bracket-tr"></div>
+              <div class="hud-bracket hud-bracket-bl"></div>
+              <div class="hud-bracket hud-bracket-br"></div>
 
               <div class="showcase-preview-frame">
                 <canvas id="prev-canvas-0" class="preview-canvas-3d"></canvas>
@@ -4150,14 +3827,14 @@
               <div class="showcase-body card-content-3d">
                 <div class="showcase-tags">
                   <span class="showcase-tag">Three.js</span>
-                  <span class="showcase-tag">Custom GLSL</span>
-                  <span class="showcase-tag">Dielectric Shaders</span>
+                  <span class="showcase-tag">GLSL Shaders</span>
                   <span class="showcase-tag">Web Audio API</span>
+                  <span class="showcase-tag">React Three Fiber</span>
                 </div>
                 
                 <h3 style="font-size: 22px; font-weight: 600; color: #ffffff; margin-bottom: 8px;">3D WebGL Spatial Product Configurator</h3>
                 <p style="font-size: 14px; color: rgba(255, 255, 255, 0.65); line-height: 1.6; flex: 1;">
-                  Ultra-high fidelity interactive 3D spatial viewport with real-time physical material dispersion, GPU instancing, and zero frame drops across iOS and Android.
+                  High-fidelity interactive 3D spatial viewport with procedural material reflections, camera physics, and zero GPU frame drops on mobile.
                 </p>
 
                 <div class="showcase-metrics-bar">
@@ -4175,13 +3852,12 @@
                   </div>
                 </div>
 
-                <div class="showcase-actions">
-                  <button onclick="inspectCaseStudy('cyberspatial'); playAudio('chime');" class="btn-blueprint">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    <span>Inspect Blueprint</span>
+                <div style="display: flex; gap: 12px; margin-top: 10px;">
+                  <button onclick="inspectCaseStudy('cyberspatial'); playAudio('chime');" class="btn-liquid-ghost" style="flex: 1; height: 42px; font-size: 13px; justify-content: center; border-radius: 8px;">
+                    Inspect Case Study
                   </button>
-                  <button onclick="openProjectModal('3D Spatial Configurator'); playAudio('click');" class="btn-scope">
-                    <span>Request Scope</span>
+                  <button onclick="openProjectModal('3D Spatial Configurator'); playAudio('click');" class="btn-emerald" style="height: 42px; font-size: 13px;">
+                    Request Scope
                   </button>
                 </div>
               </div>
@@ -4190,16 +3866,13 @@
           </div>
 
           <!-- Project 2: NEURALMESH // Multi-Agent AI Cognition Engine -->
-          <div class="reveal showcase-item" data-category="ai" onmouseenter="speedUpPreview(1, true)" onmouseleave="speedUpPreview(1, false)">
+          <div class="reveal tilt-card-wrapper" onmouseenter="speedUpPreview(1, true)" onmouseleave="speedUpPreview(1, false)">
             <div class="showcase-card spotlight-card">
-              <!-- Top System Metadata Strip -->
-              <div class="showcase-top-meta">
-                <span class="meta-status-chip" style="color: #38bdf8;">
-                  <span class="sonar-beacon" style="width: 7px; height: 7px;"><span class="sonar-wave" style="border-color: #38bdf8;"></span><span class="sonar-dot" style="width: 5px; height: 5px; background: #38bdf8;"></span></span>
-                  AUTONOMOUS AGENT MESH
-                </span>
-                <span class="meta-release-tag">DEPLOYED AT SCALE</span>
-              </div>
+              <div class="glass-glare"></div>
+              <div class="hud-bracket hud-bracket-tl"></div>
+              <div class="hud-bracket hud-bracket-tr"></div>
+              <div class="hud-bracket hud-bracket-bl"></div>
+              <div class="hud-bracket hud-bracket-br"></div>
 
               <div class="showcase-preview-frame">
                 <canvas id="prev-canvas-1" class="preview-canvas-3d"></canvas>
@@ -4213,37 +3886,36 @@
                 <div class="showcase-tags">
                   <span class="showcase-tag">Supabase pgvector</span>
                   <span class="showcase-tag">Python / Rust</span>
-                  <span class="showcase-tag">Streaming LLMs</span>
-                  <span class="showcase-tag">Next.js 15 Edge</span>
+                  <span class="showcase-tag">Streaming LLM</span>
+                  <span class="showcase-tag">Next.js 14</span>
                 </div>
                 
                 <h3 style="font-size: 22px; font-weight: 600; color: #ffffff; margin-bottom: 8px;">Autonomous Multi-Agent AI Topology</h3>
                 <p style="font-size: 14px; color: rgba(255, 255, 255, 0.65); line-height: 1.6; flex: 1;">
-                  Distributed multi-agent reasoning pipeline that ingests enterprise data, performs sub-15ms vector recall, and streams verified intelligence outputs.
+                  Distributed reasoning pipeline connecting vector embeddings with tool orchestration and high-throughput real-time executive summaries.
                 </p>
 
                 <div class="showcase-metrics-bar">
                   <div class="metric-col">
-                    <div class="metric-val" style="color: #38bdf8;">12ms</div>
+                    <div class="metric-val">12ms</div>
                     <div class="metric-lbl">Vector Recall</div>
                   </div>
                   <div class="metric-col">
-                    <div class="metric-val" style="color: #38bdf8;">1.2M+</div>
+                    <div class="metric-val">1.2M+</div>
                     <div class="metric-lbl">Tokens / Day</div>
                   </div>
                   <div class="metric-col">
-                    <div class="metric-val" style="color: #38bdf8;">99.98%</div>
+                    <div class="metric-val">99.98%</div>
                     <div class="metric-lbl">Reliability SLA</div>
                   </div>
                 </div>
 
-                <div class="showcase-actions">
-                  <button onclick="inspectCaseStudy('neuralmesh'); playAudio('chime');" class="btn-blueprint">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    <span>Inspect Blueprint</span>
+                <div style="display: flex; gap: 12px; margin-top: 10px;">
+                  <button onclick="inspectCaseStudy('neuralmesh'); playAudio('chime');" class="btn-liquid-ghost" style="flex: 1; height: 42px; font-size: 13px; justify-content: center; border-radius: 8px;">
+                    Inspect Case Study
                   </button>
-                  <button onclick="openProjectModal('AI Multi-Agent Pipeline'); playAudio('click');" class="btn-scope">
-                    <span>Request Scope</span>
+                  <button onclick="openProjectModal('AI Multi-Agent Pipeline'); playAudio('click');" class="btn-emerald" style="height: 42px; font-size: 13px;">
+                    Request Scope
                   </button>
                 </div>
               </div>
@@ -4252,16 +3924,13 @@
           </div>
 
           <!-- Project 3: QUANTUMEDGE // Low-Latency FinTech Telemetry -->
-          <div class="reveal showcase-item" data-category="edge" onmouseenter="speedUpPreview(2, true)" onmouseleave="speedUpPreview(2, false)">
+          <div class="reveal tilt-card-wrapper" onmouseenter="speedUpPreview(2, true)" onmouseleave="speedUpPreview(2, false)">
             <div class="showcase-card spotlight-card">
-              <!-- Top System Metadata Strip -->
-              <div class="showcase-top-meta">
-                <span class="meta-status-chip" style="color: #fbbf24;">
-                  <span class="sonar-beacon" style="width: 7px; height: 7px;"><span class="sonar-wave" style="border-color: #fbbf24;"></span><span class="sonar-dot" style="width: 5px; height: 5px; background: #fbbf24;"></span></span>
-                  INSTITUTIONAL WASM
-                </span>
-                <span class="meta-release-tag">ZERO JANK TELEMETRY</span>
-              </div>
+              <div class="glass-glare"></div>
+              <div class="hud-bracket hud-bracket-tl"></div>
+              <div class="hud-bracket hud-bracket-tr"></div>
+              <div class="hud-bracket hud-bracket-bl"></div>
+              <div class="hud-bracket hud-bracket-br"></div>
 
               <div class="showcase-preview-frame">
                 <canvas id="prev-canvas-2" class="preview-canvas-3d"></canvas>
@@ -4286,26 +3955,25 @@
 
                 <div class="showcase-metrics-bar">
                   <div class="metric-col">
-                    <div class="metric-val" style="color: #fbbf24;">8ms</div>
+                    <div class="metric-val">8ms</div>
                     <div class="metric-lbl">Edge TTFB</div>
                   </div>
                   <div class="metric-col">
-                    <div class="metric-val" style="color: #fbbf24;">0.00</div>
+                    <div class="metric-val">0.00</div>
                     <div class="metric-lbl">CLS Score</div>
                   </div>
                   <div class="metric-col">
-                    <div class="metric-val" style="color: #fbbf24;">100/100</div>
+                    <div class="metric-val">100/100</div>
                     <div class="metric-lbl">Lighthouse</div>
                   </div>
                 </div>
 
-                <div class="showcase-actions">
-                  <button onclick="inspectCaseStudy('quantumedge'); playAudio('chime');" class="btn-blueprint">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    <span>Inspect Blueprint</span>
+                <div style="display: flex; gap: 12px; margin-top: 10px;">
+                  <button onclick="inspectCaseStudy('quantumedge'); playAudio('chime');" class="btn-liquid-ghost" style="flex: 1; height: 42px; font-size: 13px; justify-content: center; border-radius: 8px;">
+                    Inspect Case Study
                   </button>
-                  <button onclick="openProjectModal('High-Performance Web System'); playAudio('click');" class="btn-scope">
-                    <span>Request Scope</span>
+                  <button onclick="openProjectModal('High-Performance Web System'); playAudio('click');" class="btn-emerald" style="height: 42px; font-size: 13px;">
+                    Request Scope
                   </button>
                 </div>
               </div>
@@ -4314,16 +3982,13 @@
           </div>
 
           <!-- Project 4: AETHERIUS // Generative Audio-Visual Luxury Platform -->
-          <div class="reveal showcase-item" data-category="3d" onmouseenter="speedUpPreview(3, true)" onmouseleave="speedUpPreview(3, false)">
+          <div class="reveal tilt-card-wrapper" onmouseenter="speedUpPreview(3, true)" onmouseleave="speedUpPreview(3, false)">
             <div class="showcase-card spotlight-card">
-              <!-- Top System Metadata Strip -->
-              <div class="showcase-top-meta">
-                <span class="meta-status-chip" style="color: #c084fc;">
-                  <span class="sonar-beacon" style="width: 7px; height: 7px;"><span class="sonar-wave" style="border-color: #c084fc;"></span><span class="sonar-dot" style="width: 5px; height: 5px; background: #c084fc;"></span></span>
-                  SENSORY SUITE BENCHMARK
-                </span>
-                <span class="meta-release-tag">AWARDS GRADE</span>
-              </div>
+              <div class="glass-glare"></div>
+              <div class="hud-bracket hud-bracket-tl"></div>
+              <div class="hud-bracket hud-bracket-tr"></div>
+              <div class="hud-bracket hud-bracket-bl"></div>
+              <div class="hud-bracket hud-bracket-br"></div>
 
               <div class="showcase-preview-frame">
                 <canvas id="prev-canvas-3" class="preview-canvas-3d"></canvas>
@@ -4336,9 +4001,9 @@
               <div class="showcase-body card-content-3d">
                 <div class="showcase-tags">
                   <span class="showcase-tag">WebGL 2.0</span>
-                  <span class="showcase-tag">Web Audio API</span>
+                  <span class="showcase-tag">Audio Synthesizer</span>
                   <span class="showcase-tag">Fluid Dynamics</span>
-                  <span class="showcase-tag">Lenis Scroll</span>
+                  <span class="showcase-tag">Lenis Smooth Scroll</span>
                 </div>
                 
                 <h3 style="font-size: 22px; font-weight: 600; color: #ffffff; margin-bottom: 8px;">Generative Audio-Visual Luxury Platform</h3>
@@ -4348,26 +4013,25 @@
 
                 <div class="showcase-metrics-bar">
                   <div class="metric-col">
-                    <div class="metric-val" style="color: #c084fc;">100%</div>
+                    <div class="metric-val">100%</div>
                     <div class="metric-lbl">Bespoke Code</div>
                   </div>
                   <div class="metric-col">
-                    <div class="metric-val" style="color: #c084fc;">4.9/5.0</div>
+                    <div class="metric-val">4.9/5.0</div>
                     <div class="metric-lbl">Design Rating</div>
                   </div>
                   <div class="metric-col">
-                    <div class="metric-val" style="color: #c084fc;">SOTD</div>
+                    <div class="metric-val">SOTD</div>
                     <div class="metric-lbl">Award Grade</div>
                   </div>
                 </div>
 
-                <div class="showcase-actions">
-                  <button onclick="inspectCaseStudy('aetherius'); playAudio('chime');" class="btn-blueprint">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    <span>Inspect Blueprint</span>
+                <div style="display: flex; gap: 12px; margin-top: 10px;">
+                  <button onclick="inspectCaseStudy('aetherius'); playAudio('chime');" class="btn-liquid-ghost" style="flex: 1; height: 42px; font-size: 13px; justify-content: center; border-radius: 8px;">
+                    Inspect Case Study
                   </button>
-                  <button onclick="openProjectModal('Luxury Brand Experience'); playAudio('click');" class="btn-scope">
-                    <span>Request Scope</span>
+                  <button onclick="openProjectModal('Luxury Brand Experience'); playAudio('click');" class="btn-emerald" style="height: 42px; font-size: 13px;">
+                    Request Scope
                   </button>
                 </div>
               </div>
@@ -4376,24 +4040,6 @@
           </div>
 
         </div>
-
-        <!-- High-Tech Telemetry Banner at bottom of showcase -->
-        <div class="showcase-telemetry-banner">
-          <div class="telemetry-item">
-            <span class="sonar-beacon" style="width: 6px; height: 6px;"><span class="sonar-dot"></span></span>
-            <span>RUNTIME: <strong>VERCEL GLOBAL EDGE</strong></span>
-          </div>
-          <div class="telemetry-item">
-            <span>THREAD LOCKUP: <strong>0.0ms MAIN-THREAD</strong></span>
-          </div>
-          <div class="telemetry-item">
-            <span>INTELLECTUAL PROPERTY: <strong>100% CLIENT TRANSFER</strong></span>
-          </div>
-          <div class="telemetry-item">
-            <span>DIRECT SUPERVISION: <strong>FARHAN KHAN &times; HARSH RAWAT</strong></span>
-          </div>
-        </div>
-
       </div>
     </section>
 
@@ -5687,19 +5333,39 @@
       setTimeout(checkReveals, 400);
     }
 
-    // 2.1 Smooth Glitch-Free Viewport Controller
+    // 2.1 Dynamic 3D Scroll Parallax & Spatial Tilt Engine
     (function init3DScrollEngine() {
-      // Lightweight single observer instead of thrashing getBoundingClientRect on scroll
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('in-view');
-            }
-          });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.tilt-card-wrapper').forEach(card => observer.observe(card));
+      let scrollY = window.scrollY;
+      let targetScrollY = scrollY;
+      let ticking = false;
+
+      const tiltCards = document.querySelectorAll('.tilt-card-wrapper');
+
+      function update3DScroll() {
+        scrollY += (targetScrollY - scrollY) * 0.15;
+        const viewCenter = window.innerHeight / 2;
+
+        tiltCards.forEach(cardWrap => {
+          const rect = cardWrap.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const cardCenter = rect.top + rect.height / 2;
+            const distFromCenter = (cardCenter - viewCenter) / viewCenter; // -1 to 1
+            const scrollTiltX = Math.max(-5, Math.min(5, distFromCenter * 3.8));
+            cardWrap.style.setProperty('--scroll-tilt', `${scrollTiltX.toFixed(2)}deg`);
+          }
+        });
       }
+
+      window.addEventListener('scroll', () => {
+        targetScrollY = window.scrollY;
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            update3DScroll();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
     })();
 
     // 3. Glitch-Free 60 FPS Mouse Tilt & Specular Glare Physics
@@ -6547,34 +6213,6 @@
         else log(`<span style="color: #ff6568;">Unknown command: ${cmd}. Type 'help' for options.</span>`);
       }
     }
-  
-    // ==========================================================================
-    // INERTIA MOMENTUM SMOOTH SCROLL ENGINE & SHOWCASE INTERACTION
-    // Showcase Category Filter Function
-    filterShowcase(category, btn) {
-      if (typeof playAudio === 'function') playAudio('hover');
-
-      document.querySelectorAll('.showcase-filter-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
-
-      const items = document.querySelectorAll('.showcase-item');
-      items.forEach(item => {
-        const cat = item.getAttribute('data-category');
-        if (category === 'all' || cat === category) {
-          item.style.display = 'block';
-          setTimeout(() => {
-            item.style.opacity = '1';
-            item.style.transform = 'translate3d(0, 0, 0)';
-          }, 10);
-        } else {
-          item.style.opacity = '0';
-          item.style.transform = 'translate3d(0, 16px, 0)';
-          setTimeout(() => {
-            item.style.display = 'none';
-          }, 250);
-        }
-      });
-    }
-</script>
+  </script>
 </body>
 </html>
