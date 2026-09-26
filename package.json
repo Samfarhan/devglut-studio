@@ -1,0 +1,25 @@
+{
+  "name": "devglut-studio",
+  "version": "2.0.0",
+  "private": true,
+  "description": "DEVGLUT — Creative Technology Studio founded by Farhan Khan & Harsh Rawat",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "keywords": [
+    "creative-studio",
+    "spatial-ui",
+    "threejs",
+    "webgl",
+    "fullstack",
+    "devglut"
+  ],
+  "author": "Farhan Khan × Harsh Rawat",
+  "license": "MIT"
+}
